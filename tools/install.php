@@ -3,7 +3,7 @@
 	include_once(dirname(__DIR__).DIRECTORY_SEPARATOR.'constants.php');
 	
 	$dummy_file = '.gitignore';
-/*	
+	
 	mkdir(CACHE);
 	touch(CACHE.SL.$dummy_file);
 	chmod(CACHE, 0777);
@@ -46,7 +46,7 @@ php_flag short_open_tag on
 	} 
 	
 	file_put_contents(ROOT.SL.'.htaccess', $htaccess);
-*/
+
 	if (is_dir(ROOT.SL.'sample.config') && !file_exists(ROOT.SL.'config')) {
 		$files = scandir(ROOT.SL.'sample.config');
 		
