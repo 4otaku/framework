@@ -52,7 +52,7 @@ class Templater
 				$data
 			);
 		} else {
-			include_once ROOT.SL.'templates'.SL.self::$template.SL.'index.php';
+			include_once TEMPLATES.SL.self::$template.SL.'index.php';
 		}
 
 		ob_end_flush();

@@ -5,7 +5,7 @@
 	Twig_Autoloader::register();
 
 	function twig_load_template($template_type, $template, $params) {
-		$loader = new Twig_Loader_Filesystem(ROOT.SL.'templates');
+		$loader = new Twig_Loader_Filesystem(TEMPLATES);
 		
 		$twig = new Twig_Environment($loader, array(
 		  'cache' => ROOT.SL.'cache'.SL.'twig',
