@@ -28,8 +28,7 @@ final class Globals implements Plugins
 	);
 	
 	public static function get_vars($data) {
-		self::clean_globals($data);
-		$data= self::safety_globals($data, array());
+		$data = self::clean_globals($data);
 		self::$vars = array_replace_recursive(self::$vars, $data);
 	}
 	
