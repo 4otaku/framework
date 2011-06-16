@@ -86,6 +86,8 @@ final class Globals implements Plugins
 			if (is_array($value)) {
 				$return[$new_key] = self::clean_globals($data[$key], ++$iteration);
 			} else {
+				$value = stripslashes($value);
+				
 				$value = str_replace(
 					array_keys(self::$safe_replacements),
 					array_values(self::$safe_replacements),
@@ -97,7 +99,7 @@ final class Globals implements Plugins
 				$value = str_replace('%00','',$value);
 				$value = str_replace("../","&#46;&#46;/",$value);
 				
-				$return[$new_key] = stripslashes($v);
+				$return[$new_key] = $value;
 			}
 		}
 		
