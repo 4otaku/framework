@@ -6,6 +6,6 @@
 
 	foreach ($queries as $query) {
 		if (trim($query)) {
-			Objects::db()->sql($query);
+			Database::sql($query);
 		}
 	}
