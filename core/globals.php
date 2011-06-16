@@ -75,43 +75,34 @@ final class Globals implements Plugins
 		if ($iteration > 10 || !is_array($data)) {
 			return;
 		}
+		
+		$return = array();
 
-		foreach ($data as $k => $v)	{
-			if (is_array($v)) {
-				self::clean_globals($data[$k], ++$iteration);
+		foreach ($data as $key => $value) {
+			$new_key = str_replace(
+				array_keys(self::$safe_replacements),
+				array_values(self::$safe_replacements),
+				$key);
+
+			if (is_array($value)) {
+				$return[$new_key] = self::clean_globals($data[$key], ++$iteration);
 			} else {
-				$v = str_replace(chr('0'),'',$v);
-				$v = str_replace("\0",'',$v);
-				$v = str_replace("\x00",'',$v);
-				$v = str_replace('%00','',$v);
-				$v = str_replace("../","&#46;&#46;/",$v);
-				$data[$k] = stripslashes($v);
-			}
-		}
-	}
-
-	public static function safety_globals(&$data, $input, $iteration = 0) {
-		if ($iteration > 10 || !is_array($data)) {
-			return $input;
-		}
-
-		foreach($data as $k => $v) {
-			if (is_array($v)) {
-				$input[$k] = self::safety_globals($data[$k], array(), ++$iteration);
-			} else {
-				$k = str_replace(
+				$value = str_replace(
 					array_keys(self::$safe_replacements),
 					array_values(self::$safe_replacements),
-					$k);
-				$v = str_replace(
-					array_keys(self::$safe_replacements),
-					array_values(self::$safe_replacements),
-					$v);
-				$input[$k] = $v;
+					$value);				
+				
+				$value = str_replace(chr('0'),'',$value);
+				$value = str_replace("\0",'',$value);
+				$value = str_replace("\x00",'',$value);
+				$value = str_replace('%00','',$value);
+				$value = str_replace("../","&#46;&#46;/",$value);
+				
+				$return[$new_key] = stripslashes($v);
 			}
 		}
-
-		return $input;
+		
+		return $return;
 	}
 	
 	public static function user() {
