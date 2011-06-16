@@ -1,5 +1,5 @@
 <?
-	include_once FRAMEWORK.'init.php';
+	include_once(dirname(__DIR__).DIRECTORY_SEPARATOR.'init.php');
 
 	$dump = file_get_contents(ROOT.SL.'dump'.SL.Config::database('Type').'.sql');	
 	$queries = array_filter(explode(';', $dump));
