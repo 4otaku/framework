@@ -77,3 +77,5 @@ php_flag short_open_tag on
 			}
 		}
 	}
+	
+	include 'create_db.php';
