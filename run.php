@@ -74,7 +74,7 @@
 	if (class_exists($worker) && !empty($query_output['output'])) {
 			
 		$data = new $worker();
-		$data = $data->process($query_output);
+		$data->process($query_output);
 
 		// Если ожидается вывод данных, создадим субзапросы согласно подгруженному конфигу
 		$side_modules = Config::settings('side');
