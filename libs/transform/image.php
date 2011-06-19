@@ -30,6 +30,18 @@ class Transform_Image
 		return $this;
 	}
 	
+	public function save ($target) {
+		$this->target($target);
+		
+		$this->worker->writeImage($this->target);
+		
+		return $this;
+	}
+	
+	public function get_format () {		
+		return $this->worker->getImageFormat();
+	}
+	
 	public function scale ($new_size, $compression = 80, $thumbnail = true) {
 		if (empty($this->target)) {
 			Error::warning("Не задано место сохранения новой картинки");
@@ -82,7 +94,7 @@ class Transform_Image
 			$this->worker->$func($x,$y);		
 			$this->worker->setImageCompression($this->composite['jpeg']);
 			$this->worker->setImageFormat('jpeg');
-			$this->worker->writeImage($this->target);	
+			$this->worker->writeImage($this->target);
 		}
 		
 		$this->worker->clear();
