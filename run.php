@@ -23,6 +23,7 @@
 	
 	Globals::get_vars($_GET);
 	Globals::get_vars($_POST);	
+	Globals::get_files();
 	Globals::get_url($_SERVER['REQUEST_URI']);
 	Globals::get_user($user_info);	
 

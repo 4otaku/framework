@@ -5,6 +5,9 @@ final class Globals implements Plugins
 	// Для загруженных данных
 	public static $vars = array();
 	
+	// Для загруженных файлов
+	public static $files = array();
+	
 	// Для адреса запроса
 	public static $url = array();	
 	
@@ -30,6 +33,11 @@ final class Globals implements Plugins
 	public static function get_vars($data) {
 		$data = self::clean_globals($data);
 		self::$vars = array_replace_recursive(self::$vars, $data);
+	}
+	
+	public static function get_files() {
+		self::$files = $_FILES;
+		unset($_FILES);
 	}
 	
 	public static function get_url($request) {
