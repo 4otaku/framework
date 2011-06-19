@@ -42,6 +42,14 @@ class Transform_Image
 		return $this->worker->getImageFormat();
 	}
 	
+	public function get_width () {		
+		return $this->worker->getImageWidth();
+	}
+	
+	public function get_height () {		
+		return $this->worker->getImageHeight();
+	}
+	
 	public function scale ($new_size, $compression = 80, $thumbnail = true) {
 		if (empty($this->target)) {
 			Error::warning("Не задано место сохранения новой картинки");
