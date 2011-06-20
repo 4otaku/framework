@@ -58,9 +58,9 @@ class Transform_Text
 		return preg_replace('/<([a-zA-Z]+)[^>]+class="[^"]*(?<=\s|")hidden(?=\s|")[^"]*"[^>]*>.*?<\/\1>/is', '', $text);
 	}
 
-	function format($text) {
+	public static function format ($text) {
 		$text = str_replace("\r","",$text);
-		$text = $this->bb2html($text);
+		$text = self::bb2html($text);
 		$text = preg_replace(self::URL_REGEX, '<a href="$0">$0</a>', $text);
 		$text = str_replace('⟯','http',nl2br($text));
 		return $text;
@@ -214,7 +214,7 @@ class Transform_Text
 		return $return;
 	}
 
-	function bb2html ($string) {
+	public static function bb2html ($string) {
         while (preg_match_all(self::bbcode_regex, $string, $matches)) {
 			foreach ($matches[0] as $key => $match) {
 				list($tag, $param, $innertext) = array($matches[1][$key], $matches[2][$key], $matches[3][$key]);
