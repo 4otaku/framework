@@ -2,8 +2,8 @@
 
 class Transform_Text
 {
-	const url_regex = '/(https?|ftp|irc):\/\/[:_\p{L}\d\-\.]+\.[:\p{L}\d]+(\/.+?(?=\.\s|"\s|\)\s|,\s|\s|$|&nbsp;|\[\/?[a-z]{1,8}|　))?/s';
-	const bbcode_regex = '/\[([a-zA-Z]*)=?([^\n]*?)\](.*?)\[\/\1\]/is';
+	const URL_REGEX = '/(https?|ftp|irc):\/\/[:_\p{L}\d\-\.]+\.[:\p{L}\d]+(\/.+?(?=\.\s|"\s|\)\s|,\s|\s|$|&nbsp;|\[\/?[a-z]{1,8}|　))?/s';
+	const BBCODE_REGEX = '/\[([a-zA-Z]*)=?([^\n]*?)\](.*?)\[\/\1\]/is';
 	
 	function strtolower_ru ($text) {
 		$alfavitlover = array('ё','й','ц','у','к','е','н','г', 'ш','щ','з','х','ъ','ф','ы','в', 'а','п','р','о','л','д','ж','э', 'я','ч','с','м','и','т','ь','б','ю');
@@ -215,7 +215,7 @@ class Transform_Text
 	}
 
 	public static function bb2html ($string) {
-        while (preg_match_all(self::bbcode_regex, $string, $matches)) {
+        while (preg_match_all(self::BBCODE_REGEX, $string, $matches)) {
 			foreach ($matches[0] as $key => $match) {
 				list($tag, $param, $innertext) = array($matches[1][$key], $matches[2][$key], $matches[3][$key]);
 				switch ($tag) {
