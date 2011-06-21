@@ -267,8 +267,13 @@ class Database_Mysql extends Database_Common implements Database_Interface
 		
 		$query = "UPDATE `{$this->prefix}$table` SET ";
 
-		foreach ($keys as $key) {
-			$query .= "`$key` = ?,";
+		foreach ($keys as $id => $key) {
+			if ($values[$id] == '++') {
+				$query .= "`$key` = `$key`+1,";
+				unset($values[$id]);
+			} else {
+				$query .= "`$key` = ?,";
+			}
 		}
 		
 		$query = rtrim($query,',');
