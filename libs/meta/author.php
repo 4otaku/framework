@@ -11,8 +11,8 @@ class Meta_Author extends Meta_Library implements Plugins
 	}	
 
 	public function get_alias_by_name ($name) {
-		$condition = "type='author' and name='?'";
+		$condition = "type='author' and name=?";
 
 		return Database::get_field('meta', 'alias', $condition, $name);
-	}	
+	}
 }
