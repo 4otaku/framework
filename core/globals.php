@@ -138,7 +138,7 @@ final class Globals implements Plugins
 			return $preferences === null ? $config : $preferences;
 		}
 		
-		return array_replace_recursive($config, $preferences);
+		return array_replace_recursive((array) $config, (array) $preferences);
 	}
 	
 	public static function search_array($data, $arguments) {
