@@ -17,9 +17,11 @@ abstract class Output extends Query implements Plugins
 
 		$this->$function($query);
 
-		foreach ((array) $this->items as & $item) {
-			if (is_object($item) && is_callable(array($item, 'postprocess'))) {
-				$item->postprocess();
+		if (!empty($this->items) && is_array($this->items)) {
+			foreach ($this->items as & $item) {
+				if (is_object($item) && is_callable(array($item, 'postprocess'))) {
+					$item->postprocess();
+				}
 			}
 		}
 	
