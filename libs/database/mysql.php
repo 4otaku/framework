@@ -346,7 +346,17 @@ class Database_Mysql extends Database_Common implements Database_Interface
 		foreach ($search_values as $value) {
 			list($sign, $word, $prefix) = $value;
 			
-			$value = ' ' . $sign . ($prefix ? $prefix . '__' : '') . $word;
+			$word = (array) $word;
+			
+			$value = ' '.$sign;
+			$value .= (count($word) > 1) ? '(' : '';
+			
+			foreach ($word as $one) {
+				$value .= ($prefix ? $prefix . '__' : '') . $one . ' ';
+			}
+			
+			$value .= (count($word) > 1) ? ')' : '';	
+
 			$return .= mysql_real_escape_string($value, $this->connection);
 		}
 		
