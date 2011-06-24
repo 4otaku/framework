@@ -156,7 +156,7 @@ class Transform_Text
 				!empty($part) &&
 				!in_array($part{0},array(' ',"\t","\r","\n",'<')) &&
 				strlen($part) > $length &&
-				preg_match_all('/(&[a-z]{1,8};|.){'.($length+1).'}/iu', $part, $matches, PREG_OFFSET_CAPTURE | PREG_SET_ORDER)
+				preg_match_all('/(&[a-z#]{1,8};|.){'.($length+1).'}/iu', $part, $matches, PREG_OFFSET_CAPTURE | PREG_SET_ORDER)
 			) {
 				$parts[$key] = ''; $last_position = 0;
 				foreach ($matches as $match) {
