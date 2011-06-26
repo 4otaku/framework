@@ -18,10 +18,14 @@ final class Config
 	} 
 	
 	public static function load($file, $module_config = false, $main_module = false) {
+		if (!is_readable($file)) {
+			$file = str_replace(SL.'modules'.SL, SL.'side_modules'.SL, $file);
+		}
+			
 		if (
 			!is_readable($file) || 
 			pathinfo($file, PATHINFO_EXTENSION) !== 'ini'
-		) {
+		) {				
 			return false;
 		}
 	
