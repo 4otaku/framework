@@ -32,7 +32,7 @@ abstract class Output_Main extends Output implements Plugins
 			'curr_page' => $page,
 			'pagecount' => ceil($count / $perpage),
 			'query' => $query,
-			'module' => 'post',
+			'module' => Globals::$url[0],
 		));		
 	}
 	
