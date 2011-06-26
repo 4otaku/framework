@@ -9,7 +9,10 @@ final class Globals implements Plugins
 	public static $files = array();
 	
 	// Для адреса запроса
-	public static $url = array();	
+	public static $url = array();
+	
+	// Для необработанного адреса запроса
+	public static $raw_url = array();	
 	
 	// Для алиасов урла
 	public static $url_aliases = array();
@@ -50,6 +53,8 @@ final class Globals implements Plugins
 		if (empty($url)) {
 			$url = array('index');
 		}
+		
+		self::$raw_url = $url;
 		
 		$aliases = Config::alias();
 		foreach ($aliases as $key => $alias) {
