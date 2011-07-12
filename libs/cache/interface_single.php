@@ -1,14 +1,14 @@
-<?
-	
+<?php
+
 interface Cache_Interface_Single
-{	
-	public static function set ($key, $value, $expire); 
-	
-	public static function get ($key);
-	
-	public static function delete ($key);
-	
-	public static function increment ($key, $value);
-	
-	public static function decrement ($key, $value);
+{
+	public function set ($key, $value, $expire);
+
+	public function get ($key);
+
+	public function delete ($key);
+
+	public function increment ($key, $value);
+
+	public function decrement ($key, $value);
 }
