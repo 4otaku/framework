@@ -28,8 +28,7 @@ class Cache
 			return self::$worker;
 		}
 
-		Config::init("cache");
-		$config = Config::get_section("cache");
+		$config = Config::main("cache");
 
 		self::$base_prefix = $config["prefix"];
 
