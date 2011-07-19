@@ -22,6 +22,10 @@ class Query implements Plugins
 			$query['output'] = true;
 		}
 		
+		if (!empty($vars['function'])) {
+			return array_merge($vars, $query);
+		}		
+		
 		// Первый элемент массива урла - указатель на рабочий модуль, 
 		// он уже не нужен, убираем
 		array_shift($url);
@@ -38,7 +42,7 @@ class Query implements Plugins
 	}
 	
 	public static function make_query_input ($vars) {
-		if (empty($vars['function'])) {
+		if (empty($vars['input']) || empty($vars['function'])) {
 			return array();
 		}
 		
@@ -62,6 +66,10 @@ class Query implements Plugins
 		
 		return ucfirst($module).'_'.ucfirst($type);
 	}	
+	
+	public static function get_output_module ($query) {
+		return self::get_worker_name($query['module'], $query, 'output');
+	}
 	
 	public function valid_subquery ($area, $query) {
 	

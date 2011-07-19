@@ -30,7 +30,13 @@ class Templater
 		if (!empty($data->template)) {
 			self::$template = $data->template;
 		}
-		
+
+		if (!empty($data->flags['ajax'])) {
+			$directory = 'ajax';
+		} else {
+			$directory = 'html';
+		}
+
 		$data = array(
 			'items' => $data->items,
 			'flag' => $data->flags,
@@ -47,7 +53,7 @@ class Templater
 
 			call_user_func(
 				self::$template_engine . '_load_template',
-				'html',
+				$directory,
 				self::$template,
 				$data
 			);

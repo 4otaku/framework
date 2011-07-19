@@ -23,6 +23,9 @@ final class Globals implements Plugins
 	// Настройки пользователя
 	public static $preferences = false;
 	
+	// Собранные во время выполнения ошибки
+	public static $errors = array();
+	
 	static private $safe_replacements = array(
 		'&' => '&amp;',
 		'"' => '&quot;',

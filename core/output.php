@@ -12,8 +12,17 @@ abstract class Output extends Query implements Plugins
 	public $submodules = array();
 	
 	public function process ($query) {
-		$query = (array) $query;		
-		$function = empty($query['function']) ? 'main' : $query['function'];
+		$query = (array) $query;
+		
+		if (empty($query['function'])) {
+			$function = 'main';
+		} else { 
+			$function = $query['function'];
+		}
+		
+		if (!empty($query['ajax'])) {
+			$this->flags['ajax'] = true;
+		}		
 
 		$this->$function($query);
 
