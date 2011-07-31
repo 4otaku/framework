@@ -64,7 +64,7 @@
 		$worker = new $worker();
 		$worker->process($query_input);
 		
-		if (!empty($worker->redirect_address)) {
+		if ($worker->redirect_address !== false) {
 			Http::redirect($worker->redirect_address);
 		}
 	}
