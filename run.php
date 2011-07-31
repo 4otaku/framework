@@ -72,7 +72,7 @@
 	$worker = Query::get_worker_name($module, $query_output, 'output');
 
 	if (class_exists($worker) && !empty($query_output['output'])) {
-			
+		
 		$data = new $worker();
 		$data->process($query_output);
 
