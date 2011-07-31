@@ -7,7 +7,24 @@ class Transform_Image
 	protected $worker;
 	protected $composite = array();
 	
-	public function __construct ($file) {
+	public function __construct ($mode, $input = false) {
+		
+		switch ($mode) {
+			case 'post':
+				$file = tempnam('/tmp', 'image');
+				$input = file_get_contents('php://input');			
+				file_put_contents($file, $input);
+				break;
+			case 'file':
+				$file = $input;
+				break;
+			case 'raw':
+				$file = tempnam('/tmp', 'image');		
+				file_put_contents($file, $input);
+				break;
+			default:
+				break;
+		}
 		
 		if (!class_exists('Imagick')) {
 			
