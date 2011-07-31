@@ -4,6 +4,7 @@ class Transform_Image
 {
 	protected $target = false;
 	protected $data;
+	protected $size;
 	protected $worker;
 	protected $composite = array();
 	
@@ -12,28 +13,32 @@ class Transform_Image
 		switch ($mode) {
 			case 'post':
 				$file = tempnam('/tmp', 'image');
-				$input = file_get_contents('php://input');			
+				$input = file_get_contents('php://input');	
 				file_put_contents($file, $input);
+				$this->size = strlen($input);
 				break;
 			case 'file':
 				$file = $input;
+				$this->size = filesize($input);
 				break;
 			case 'raw':
 				$file = tempnam('/tmp', 'image');		
 				file_put_contents($file, $input);
+				$this->size = strlen($input);
 				break;
 			default:
+				Error::warning("Некорректное использование класса Transform_Image");
 				break;
 		}
 		
 		if (!class_exists('Imagick')) {
-			
+		
 			$this->worker = new Imagick_Substitute($file);
-			
+		
 			$this->composite['over'] = Imagick_Substitute::COMPOSITE_OVER;
 			$this->composite['jpeg'] = Imagick_Substitute::COMPRESSION_JPEG;	
 		} else {
-			
+	
 			$this->worker = new Imagick($file);
 			
 			$this->composite['over'] = Imagick::COMPOSITE_OVER;
@@ -65,6 +70,10 @@ class Transform_Image
 	
 	public function get_height () {		
 		return $this->worker->getImageHeight();
+	}
+	
+	public function get_size () {		
+		return $this->size;
 	}
 	
 	public function scale ($new_size, $compression = 80, $thumbnail = true) {
@@ -158,9 +167,9 @@ class Imagick_Substitute {
 		$this->format = $format[1];
 		switch ($this->format) {
 			case 'png': $this->data = imagecreatefrompng($this->path); break;
-			case 'jpeg': $this->data = imagecreatefromjpeg($this->path); break;
+			case 'jpg': case 'jpeg': $this->data = imagecreatefromjpeg($this->path); break;
 			case 'gif': $this->data = imagecreatefromgif($this->path); break;
-			default: die;
+			default: $this->data = false;
 		}		
 	}
 	

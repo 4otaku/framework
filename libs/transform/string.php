@@ -70,6 +70,26 @@ class Transform_String
 		return $time + (int) $add_current * time();
 	}
 	
+	public static function parse_weight ($string) {
+		$parts = preg_split('/([^\d]+)/', $string, null, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
+		
+		$weight = 0;
+		
+		for ($i = 1; $i < count($parts); $i += 2) {
+			$parts[$i] = trim($parts[$i]);
+			switch ($parts[$i]) {
+				case 'G': $multiplier = GIGABYTE; break;
+				case 'M': $multiplier = MEGABYTE; break;
+				case 'K': $multiplier = KILOBYTE; break;
+				default: $multiplier = 0; break;
+			}
+			
+			$weight = $weight + $parts[$i - 1] * $multiplier;
+		}
+		
+		return $weight;
+	}	
+	
 	public static function round_bytes ($bytes, $precision = 1) {
 		if ($bytes > GIGABYTE) {
 			return array(round($bytes/GIGABYTE, $precision), 'гб');
