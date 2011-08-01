@@ -100,7 +100,7 @@ final class Globals implements Plugins
 				$key);
 
 			if (is_array($value)) {
-				$return[$new_key] = self::clean_globals($data[$key], ++$iteration);
+				$return[$new_key] = self::clean_globals($data[$key], $iteration + 1);
 			} else {
 				$value = stripslashes($value);
 				
