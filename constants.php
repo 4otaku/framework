@@ -8,6 +8,7 @@
 	define('SL', DIRECTORY_SEPARATOR);
 
 	define('LIBS', ROOT_DIR.SL.'libs');
+	define('FRAMEWORK', ROOT_DIR.SL.'framework');
 
 	define('FILES', ROOT_DIR.SL.'files');
 	define('IMAGES', ROOT_DIR.SL.'images');
