@@ -9,6 +9,7 @@
 
 	define('LIBS', ROOT_DIR.SL.'libs');
 	define('FRAMEWORK', ROOT_DIR.SL.'framework');
+	define('CONFIG', ROOT_DIR.SL.'config');
 
 	define('FILES', ROOT_DIR.SL.'files');
 	define('IMAGES', ROOT_DIR.SL.'images');
