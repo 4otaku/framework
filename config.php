@@ -31,4 +31,24 @@ class Config
 		$data = (array) parse_ini_file($file);
 		self::add($data, $protected);
 	}
+
+	public static function get($section = false, $key = false)
+	{
+		if (empty($section))
+		{
+			return self::$config;
+		}
+
+		if (empty($key) && isset(self::$config[$section]))
+		{
+			return self::$config[$section];
+		}
+
+		if (isset(self::$config[$section]) && isset(self::$config[$section][$key]))
+		{
+			return self::$config[$section][$key];
+		}
+
+		return null;
+	}
 }
