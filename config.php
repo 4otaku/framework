@@ -14,6 +14,21 @@ class Config
 					continue;
 				}
 
+				if (preg_match('/^\s*(\d+(?:\.\d+)?)\s+([kmg]?b)\s*$/ui', $value, $parts)) {
+					$multiplier = false;
+					switch ($parts[1]) {
+						case 'b': $multiplier = 1; break;
+						case 'kb': $multiplier = KILOBYTE; break;
+						case 'mb': $multiplier = MEGABYTE; break;
+						case 'gb': $multiplier = GIGABYTE; break;
+						default: break;
+					}
+
+					if ($multiplier) {
+						$value = $parts[1] * $multiplier;
+					}
+				}
+
 				self::$config[$top][$key] = $value;
 				self::$protected[$top][$key] = $protected;
 			}
