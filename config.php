@@ -16,7 +16,7 @@ class Config
 
 				if (preg_match('/^\s*(\d+(?:\.\d+)?)\s+([kmg]?b)\s*$/ui', $value, $parts)) {
 					$multiplier = false;
-					switch ($parts[1]) {
+					switch ($parts[2]) {
 						case 'b': $multiplier = 1; break;
 						case 'kb': $multiplier = KILOBYTE; break;
 						case 'mb': $multiplier = MEGABYTE; break;
@@ -43,7 +43,7 @@ class Config
 				'Missing config file: ' . basename($file));
 		}
 
-		$data = (array) parse_ini_file($file, true);
+		$data = (array) parse_ini_file($file);
 		self::add($data, $protected);
 	}
 
