@@ -43,7 +43,7 @@ class Config
 				'Missing config file: ' . basename($file));
 		}
 
-		$data = (array) parse_ini_file($file);
+		$data = (array) parse_ini_file($file, true);
 		self::add($data, $protected);
 	}
 
