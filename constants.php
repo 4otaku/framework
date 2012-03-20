@@ -7,8 +7,12 @@
 
 	define('SL', DIRECTORY_SEPARATOR);
 
-	define('LIBS', ROOT_DIR.SL.'libs');
 	define('FRAMEWORK', ROOT_DIR.SL.'framework');
+	define('FRAMEWORK_LIBS', FRAMEWORK.SL.'libs');
+	define('FRAMEWORK_EXTERNAL', FRAMEWORK.SL.'external');
+
+	define('LIBS', ROOT_DIR.SL.'libs');
+	define('EXTERNAL', ROOT_DIR.SL.'external');
 	define('CONFIG', ROOT_DIR.SL.'config');
 
 	define('FILES', ROOT_DIR.SL.'files');
