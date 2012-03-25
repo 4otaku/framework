@@ -352,12 +352,11 @@ class Database_Instance extends Database_Abstract
 	}
 
 	public function order ($sorter, $type = 'desc') {
-		
-		// Backwards compatibility
+
 		if (!($sorter instanceOf Database_Sorter)) {
-			$sorter = new Database_Sorter($sorter, $type);				
+			$sorter = new Database_Sorter($sorter, $type);
 		}
-			
+
 		$this->order[] = $sorter;
 
 		return $this;
@@ -386,7 +385,7 @@ class Database_Instance extends Database_Abstract
 	public function last_id () {
 		return $this->worker->lastInsertId();
 	}
-	
+
 	public function count_affected() {
 		return $this->last_query->rowCount();
 	}
