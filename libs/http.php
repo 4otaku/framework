@@ -146,6 +146,18 @@ class Http
 		return $worker->get($url);
 	}
 
+	public static function post ($url, $data) {
+		$worker = new Http(array(
+			CURLOPT_POST => 1,
+			CURLOPT_POSTFIELDS => $data
+		), array(
+			'Content-Type' => 'text/plain'
+		));
+		$worker->add($url)->exec();
+
+		return $worker->get($url);
+	}
+
 	public static function redirect($url, $permanent = false) {
 		if ((bool) $permanent) {
 			header("HTTP/1.x 301 Moved Permanently");
