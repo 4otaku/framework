@@ -47,7 +47,7 @@ class Config
 		self::add($data, $protected);
 	}
 
-	public static function get($section = false, $key = false)
+	public static function get($section = false, $key = false, $default = null)
 	{
 		if (empty($section))
 		{
@@ -64,6 +64,6 @@ class Config
 			return self::$config[$section][$key];
 		}
 
-		return null;
+		return $default;
 	}
 }
