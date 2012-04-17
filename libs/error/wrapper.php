@@ -7,7 +7,8 @@ class Error extends Exception
 		INVALID_CONFIG = 3,
 		EMPTY_FILE = 5,
 		FILE_TOO_LARGE = 10,
-		NOT_AN_IMAGE = 20;
+		NOT_AN_IMAGE = 20,
+		INCORRECT_URL = 410;
 
 	public function __construct($message = '', $code = 0, Exception $previous = null) {
 
