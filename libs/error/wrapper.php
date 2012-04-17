@@ -4,7 +4,10 @@ class Error extends Exception
 {
 	const
 		NO_CONFIG_FILE = 2,
-		INVALID_CONFIG = 3;
+		INVALID_CONFIG = 3,
+		EMPTY_FILE = 5,
+		FILE_TOO_LARGE = 10,
+		NOT_AN_IMAGE = 20;
 
 	public function __construct($message = '', $code = 0, Exception $previous = null) {
 

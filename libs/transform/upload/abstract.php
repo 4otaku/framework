@@ -11,7 +11,7 @@ abstract class Transform_Upload_Abstract
 	protected $result = array('success' => true);
 
 	public function __construct($file, $name) {
-		if (!is_file($file)) {
+		if (!@is_file($file)) {
 			$file = $this->create_temp_file($file);
 		}
 
@@ -54,7 +54,7 @@ abstract class Transform_Upload_Abstract
 	}
 
 	protected function create_temp_file($data) {
-		$temp = ROOT_DIR.SL.'files'.SL.'tmp'.SL.microtime().'_'.md5(rand());
+		$temp = CACHE.SL.'tmp'.SL.microtime(true).'_'.md5(rand());
 
 		$handle = fopen($temp, "w");
 		fwrite($handle, $data);
