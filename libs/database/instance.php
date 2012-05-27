@@ -189,7 +189,7 @@ class Database_Instance extends Database_Abstract
 		return current($data);
 	}
 
-	public function get_field($table, $value, $condition, $params = false) {
+	public function get_field($table, $value, $condition = false, $params = false) {
 		if (is_numeric($condition)) {
 			$condition = "id = $condition";
 		}

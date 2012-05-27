@@ -54,7 +54,7 @@ class Database
 		return self::db()->get_row($table, $values, $condition, $params);
 	}
 
-	public static function get_field ($table, $value, $condition, $params = false) {
+	public static function get_field ($table, $value, $condition = false, $params = false) {
 		return self::db()->get_field($table, $value, $condition, $params);
 	}
 
