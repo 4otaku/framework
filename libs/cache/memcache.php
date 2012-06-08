@@ -11,7 +11,7 @@ class Cache_Memcache implements Cache_Interface_Single
 	// Для хранения объекта Memcache
 	protected $memcache;
 
-	public function __construct ($config) {
+	public function __construct ($config = array()) {
 
 		if (class_exists("Memcache", false)) {
 			$this->memcache = new Memcache();

@@ -4,7 +4,7 @@ class Cache_Database implements Cache_Interface_Single, Cache_Interface_Array
 {
 	public $able_to_work = true;
 
-	public function __construct ($config) {
+	public function __construct ($config = array()) {
 		$scheme = Database::sql("DESCRIBE `<pr>cache`");
 
 		if (empty($scheme)) {

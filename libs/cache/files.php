@@ -8,7 +8,7 @@ class Cache_Files implements Cache_Interface_Single
 
 	protected $igbinary = false;
 
-	public function __construct ($config) {
+	public function __construct ($config = array()) {
 
 		if (!file_exists(CACHE.SL.self::FOLDER) && is_writable(CACHE)) {
 			mkdir(CACHE.SL.self::FOLDER);

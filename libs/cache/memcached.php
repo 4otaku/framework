@@ -7,7 +7,7 @@ class Cache_Memcached implements Cache_Interface_Single, Cache_Interface_Array
 	// Для хранения объекта Memcached
 	protected $memcached;
 
-	public function __construct () {
+	public function __construct ($config = array()) {
 
 		if (class_exists("Memcached", false)) {
 			$this->memcached = new Memcached("default_fateline");

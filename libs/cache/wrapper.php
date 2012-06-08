@@ -7,8 +7,8 @@ class Cache
 
 	// Текущий префикс, нужный для конкретной операции
 	public static $prefix = "";
-	
-	
+
+
 	public static $defined_driver = false;
 
 	// Список классов которые можно использовать
@@ -49,7 +49,7 @@ class Cache
 
 		foreach (self::$drivers_list as $driver) {
 
-			if (class_exists($driver)) {				
+			if (class_exists($driver)) {
 				self::$worker = new $driver();
 
 				if (
