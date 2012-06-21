@@ -149,6 +149,7 @@ class Database_Instance extends Database_Abstract
 		} else {
 			$key = "id";
 		}
+		$key = preg_replace('/^.*\./ui', '', $key);
 
 		$data = $this->get_common($table, $values, $condition, $params);
 		$return = array();
