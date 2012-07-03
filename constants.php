@@ -2,8 +2,12 @@
 
 	define('ROOT_DIR', dirname(__DIR__));
 
-	define('DEBUG', $_SERVER['REMOTE_ADDR'] == '80.252.16.11' ||
-		$_SERVER['REMOTE_ADDR'] == '127.0.0.1');
+	if (isset($_SERVER['REMOTE_ADDR'])) {
+		define('DEBUG', $_SERVER['REMOTE_ADDR'] == '80.252.16.11' ||
+			$_SERVER['REMOTE_ADDR'] == '127.0.0.1');
+	} else {
+		define('DEBUG', 0);
+	}
 
 	define('SL', DIRECTORY_SEPARATOR);
 
