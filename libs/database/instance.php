@@ -93,12 +93,12 @@ class Database_Instance extends Database_Abstract
 		}
 		foreach ($this->filter as $key => $filter) {
 			$filter_alias = "filter$key";
-			$condition = array();
+			$filter_condition = array();
 			foreach ($filter['condition'] as $value) {
-				$condition[] = "$filter_alias.$value";
+				$filter_condition[] = "$filter_alias.$value";
 			}
-			$condition = implode(" AND ", $condition);
-			$query .= " JOIN `$filter[table]` as $filter_alias ON $condition";
+			$filter_condition = implode(" AND ", $filter_condition);
+			$query .= " JOIN `$filter[table]` as $filter_alias ON $filter_condition";
 		}
 
 		if (!empty($condition)) {
