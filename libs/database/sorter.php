@@ -59,6 +59,8 @@ class Database_Sorter
 				}
 
 				$string .= ' + ' . $field;
+			case 'random':
+				$string = 'RAND()';
 			default:
 				break;
 		}
