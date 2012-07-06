@@ -22,7 +22,7 @@
 	define('FILES', ROOT_DIR.SL.'files');
 	define('IMAGES', ROOT_DIR.SL.'images');
 
-	define('HTML', ROOT_DIR.SL.'html');
+	define('TPL', ROOT_DIR.SL.'tpl');
 	define('CSS', ROOT_DIR.SL.'css');
 	define('JS', ROOT_DIR.SL.'js');
 	define('CACHE', ROOT_DIR.SL.'cache');
