@@ -51,6 +51,14 @@ class Database_Sorter
 				}
 
 				$string .= '/' . $field;
+			case 'multiply':
+				$field = '`' . $value . '`';
+
+				if (!empty($this->prefix)) {
+					$field = '`' . $this->prefix . '`.' . $field;
+				}
+
+				$string .= '*' . $field;
 			case 'sum':
 				$field = '`' . $value . '`';
 
@@ -59,6 +67,8 @@ class Database_Sorter
 				}
 
 				$string .= ' + ' . $field;
+			case 'random':
+				$string = 'RAND()';
 			default:
 				break;
 		}

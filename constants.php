@@ -2,8 +2,12 @@
 
 	define('ROOT_DIR', dirname(__DIR__));
 
-	define('DEBUG', $_SERVER['REMOTE_ADDR'] == '80.252.16.11' ||
-		$_SERVER['REMOTE_ADDR'] == '127.0.0.1');
+	if (isset($_SERVER['REMOTE_ADDR'])) {
+		define('DEBUG', $_SERVER['REMOTE_ADDR'] == '80.252.16.11' ||
+			$_SERVER['REMOTE_ADDR'] == '127.0.0.1');
+	} else {
+		define('DEBUG', 0);
+	}
 
 	define('SL', DIRECTORY_SEPARATOR);
 
@@ -18,7 +22,7 @@
 	define('FILES', ROOT_DIR.SL.'files');
 	define('IMAGES', ROOT_DIR.SL.'images');
 
-	define('HTML', ROOT_DIR.SL.'html');
+	define('TPL', ROOT_DIR.SL.'tpl');
 	define('CSS', ROOT_DIR.SL.'css');
 	define('JS', ROOT_DIR.SL.'js');
 	define('CACHE', ROOT_DIR.SL.'cache');

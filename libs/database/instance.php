@@ -14,6 +14,7 @@ class Database_Instance extends Database_Abstract
 	protected $limit_from = false;
 	protected $limit = false;
 	protected $join = array();
+	protected $filter = array();
 
 	public function __construct($worker, $prefix = "") {
 		$this->worker = $worker;
@@ -90,6 +91,15 @@ class Database_Instance extends Database_Abstract
 		foreach ($this->join as $join) {
 			$query .= " LEFT JOIN `$join[table]` AS `$join[alias]` ON $join[condition]";
 		}
+		foreach ($this->filter as $key => $filter) {
+			$filter_alias = "filter$key";
+			$filter_condition = array();
+			foreach ($filter['condition'] as $value) {
+				$filter_condition[] = "$filter_alias.$value";
+			}
+			$filter_condition = implode(" AND ", $filter_condition);
+			$query .= " JOIN `$filter[table]` as $filter_alias ON $filter_condition";
+		}
 
 		if (!empty($condition)) {
 			$query .= " WHERE $condition";
@@ -132,6 +142,7 @@ class Database_Instance extends Database_Abstract
 		$this->limit_from = false;
 		$this->limit = false;
 		$this->join = array();
+		$this->filter = array();
 
 		return $data;
 	}
@@ -377,6 +388,15 @@ class Database_Instance extends Database_Abstract
 		$this->join[] = array(
 			'table' => $table,
 			'alias' => preg_replace('/(?<!^|_)./ui', '', $table),
+			'condition' => $condition,
+		);
+
+		return $this;
+	}
+
+	public function filter ($table, $condition) {
+		$this->filter[] = array(
+			'table' => $table,
 			'condition' => $condition,
 		);
 
