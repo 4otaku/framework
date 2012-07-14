@@ -94,8 +94,8 @@ class Database
 		return self::db()->join($table, $condition);
 	}
 
-	public static function filter ($table, $condition) {
-		return self::db()->filter($table, $condition);
+	public static function filter ($table, $condition, $reverse = false) {
+		return self::db()->filter($table, $condition, $reverse);
 	}
 
 	public static function last_id () {

@@ -98,6 +98,14 @@ class Database_Instance extends Database_Abstract
 				$filter_condition[] = "$filter_alias.$value";
 			}
 			$filter_condition = implode(" AND ", $filter_condition);
+			if ($filter['reverse']) {
+				$query .= " LEFT";
+				if (!empty($condition)) {
+					$condition .= " AND filter$key.$filter[reverse] is NULL";
+				} else {
+					$condition = "filter$key.$filter[reverse] is NULL";
+				}
+			}
 			$query .= " JOIN `$filter[table]` as $filter_alias ON $filter_condition";
 		}
 
@@ -394,10 +402,11 @@ class Database_Instance extends Database_Abstract
 		return $this;
 	}
 
-	public function filter ($table, $condition) {
+	public function filter ($table, $condition, $reverse = false) {
 		$this->filter[] = array(
 			'table' => $table,
 			'condition' => $condition,
+			'reverse' => $reverse,
 		);
 
 		return $this;
