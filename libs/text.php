@@ -3,16 +3,53 @@
 class Text
 {
 	const URL_REGEX = '/(https?|ftp):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:\/~\+#!]*[\w\-\@?^=%&amp;\/~\+#!])?/uis';
+	protected $alfavitlover = array('ё','й','ц','у','к','е','н','г', 'ш','щ','з','х','ъ','ф','ы','в', 'а','п','р','о','л','д','ж','э', 'я','ч','с','м','и','т','ь','б','ю');
+	protected $alfavitupper = array('Ё','Й','Ц','У','К','Е','Н','Г', 'Ш','Щ','З','Х','Ъ','Ф','Ы','В', 'А','П','Р','О','Л','Д','Ж','Э', 'Я','Ч','С','М','И','Т','Ь','Б','Ю');
+
 	protected $text;
-	
+
 	public function __construct($text) {
 	    $this->text = $text;
 	}
 
-	public function strtolower_ru($text) {
-		$alfavitlover = array('ё','й','ц','у','к','е','н','г', 'ш','щ','з','х','ъ','ф','ы','в', 'а','п','р','о','л','д','ж','э', 'я','ч','с','м','и','т','ь','б','ю');
-		$alfavitupper = array('Ё','Й','Ц','У','К','Е','Н','Г', 'Ш','Щ','З','Х','Ъ','Ф','Ы','В', 'А','П','Р','О','Л','Д','Ж','Э', 'Я','Ч','С','М','И','Т','Ь','Б','Ю');
-		return str_replace($alfavitupper, $alfavitlover, strtolower($text));
+	public function lower() {
+		$this->text = str_replace($this->alfavitupper,
+			$this->alfavitlover, strtolower($this->text));
+		return $this;
+	}
+
+	public function trim($mask = false) {
+		$this->text = $mask === false ? trim($this->text) :
+			trim($this->text, $mask);
+		return $this;
+	}
+
+	public function cut_on($mask) {
+		$this->text = substr($this->text, 0, strcspn($this->text, $mask));
+		return $this;
+	}
+
+	public function to_time($add_current = true) {
+		$parts = preg_split('/([^\d]+)/', $this->text, null,
+			PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
+
+		$time = 0;
+
+		for ($i = 1; $i < count($parts); $i += 2) {
+			$parts[$i] = trim($parts[$i]);
+			switch ($parts[$i]) {
+				case 'm': $multiplier = MINUTE; break;
+				case 'h': $multiplier = HOUR; break;
+				case 'd': $multiplier = DAY; break;
+				case 'w': $multiplier = WEEK; break;
+				case 'M': $multiplier = MONTH; break;
+				default: $multiplier = 0; break;
+			}
+
+			$time = $time + $parts[$i - 1] * $multiplier;
+		}
+
+		return $time + (int) $add_current * time();
 	}
 
 	public function strtoupper_ru($text) {
@@ -151,7 +188,7 @@ class Text
 
 		return implode($parts);
 	}
- 
+
 	public function cut_long_text($length, $prepend = ' ...', $cut_words = false) {
 		$text = $this->text;
 		if (strlen($text) < $length) {
@@ -252,4 +289,8 @@ class Text
     public function get_text() {
 	return $this->text;
     }
+
+	public function __toString() {
+		return $this->text;
+	}
 }
