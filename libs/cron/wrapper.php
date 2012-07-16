@@ -30,7 +30,7 @@ class Cron
 			$period = new Text($task['period']);
 			$nexttime = self::$db->unix_to_date($period->to_time() - 15);
 			self::$db->update('cron', array('last_time' => $nexttime),
-				'function = ?', $task);
+				'id = ?', $task['id']);
 		}
 	}
 }
