@@ -2,6 +2,7 @@
 
 class Cron
 {
+	protected static $db;
 	protected static $workers = array();
 
 	public static function process($id, $class, $function) {
