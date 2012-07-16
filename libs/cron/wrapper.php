@@ -19,7 +19,7 @@ class Cron
 	public static function process_db($db) {
 		self::$db = Database::db($db);
 
-		$tasks = $db->order('id', 'asc')->get_table('cron',
+		$tasks = self::$db->order('id', 'asc')->get_table('cron',
 			array('id', 'class', 'function', 'period'),
 			'last_time < ?', $db->unix_to_date());
 
@@ -29,7 +29,7 @@ class Cron
 
 			$period = new Text($task['period']);
 			$nexttime = $db->unix_to_date($period->to_time() - 15);
-			$db->update('cron', array('last_time' => $nexttime),
+			self::$db->update('cron', array('last_time' => $nexttime),
 				'function = ?', $task);
 		}
 	}
