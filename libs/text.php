@@ -24,6 +24,12 @@ class Text
 		return $this;
 	}
 
+	public function strip($mask = false) {
+		$this->text = $mask === false ? strip_tags($this->text) :
+			strip_tags($this->text, $mask);
+		return $this;
+	}
+
 	public function cut_on($mask) {
 		$this->text = substr($this->text, 0, strcspn($this->text, $mask));
 		return $this;
@@ -77,6 +83,7 @@ class Text
 		$text = preg_replace(self::URL_REGEX, '<a href="$0">$0</a>', $text);
 		$text = str_replace('⟯','http',nl2br($text));
 		$this->text = $text;
+		return $this;
 	}
 
 	public function wakaba($text) {
@@ -192,11 +199,13 @@ class Text
 	public function cut_long_text($length, $prepend = ' ...', $cut_words = false) {
 		$text = $this->text;
 		if (strlen($text) < $length) {
-			return empty($cut_words) ? $text : $this->cut_long_words($text,$cut_words);
+			$this->text = empty($cut_words) ? $text : $this->cut_long_words($text,$cut_words);
+			return $this;
 		}
 
 		if (!preg_match('/^(&\p{L}{1,8};|(<.+?>)*.){0,'.$length.'}/ius', $text, $match)) {
-			return empty($cut_words) ? $text : $this->cut_long_words($text,$cut_words);
+			$this->text = empty($cut_words) ? $text : $this->cut_long_words($text,$cut_words);
+			return $this;
 		}
 
 		preg_match_all('/<([^\s>\/]+)(?![^>]*\/>)[^>]*>/is', $match[0], $opening_tags);
@@ -229,6 +238,7 @@ class Text
 		if (strlen($match[0]) < strlen($text)) $return .= $prepend;
 
 		$this->text = $return;
+		return $this;
 	}
 
 	protected function bb2html() {
