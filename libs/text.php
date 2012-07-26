@@ -79,7 +79,7 @@ class Text
 	public function format() {
 		$text = $this->text;
 		$text = str_replace("\r","",$text);
-		$text = self::bb2html($text);
+		$this->bb2html();
 		$text = preg_replace(self::URL_REGEX, '<a href="$0">$0</a>', $text);
 		$text = str_replace('⟯','http',nl2br($text));
 		$this->text = $text;
@@ -241,7 +241,7 @@ class Text
 		return $this;
 	}
 
-	protected function bb2html() {
+	public function bb2html() {
 	$string = $this->text;
         while (preg_match_all('/\[([a-zA-Z]*)=?([^\n]*?)\](.*?)\[\/\1\]\n?/is', $string, $matches)) {
 			foreach ($matches[0] as $key => $match) {
@@ -294,7 +294,8 @@ class Text
 				$string = str_replace($match, $replacement, $string);
 			}
 		}
-        return $string;
+		$this->text = $string;
+        return $this;
     }
     public function get_text() {
 	return $this->text;
