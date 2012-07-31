@@ -77,12 +77,16 @@ class Text
 	}
 
 	public function format() {
-		$text = $this->text;
-		$text = str_replace("\r","",$text);
+		$this->text = str_replace("\r", '', $this->text);
 		$this->bb2html();
-		$text = preg_replace(self::URL_REGEX, '<a href="$0">$0</a>', $text);
-		$text = str_replace('⟯','http',nl2br($text));
-		$this->text = $text;
+		$this->links2html();
+		$this->text = str_replace('⟯', 'http', nl2br($this->text));
+		return $this;
+	}
+
+	public function links2html() {
+		$this->text = preg_replace(self::URL_REGEX,
+			'<a href="$0">$0</a>', $this->text);
 		return $this;
 	}
 
