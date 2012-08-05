@@ -18,6 +18,12 @@ class Text
 		return $this;
 	}
 
+	public function html_escape() {
+		$this->text = htmlspecialchars($this->text,
+			ENT_QUOTES, 'UTF-8', false);
+		return $this;
+	}
+
 	public function trim($mask = false) {
 		$this->text = $mask === false ? trim($this->text) :
 			trim($this->text, $mask);
