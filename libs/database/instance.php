@@ -16,9 +16,6 @@ class Database_Instance extends Database_Abstract
 	protected $join = array();
 	protected $filter = array();
 
-	protected $temp_table = false;
-	protected $temp_params = array();
-
 	public function __construct($worker, $prefix = "") {
 		$this->worker = $worker;
 		$this->prefix = $prefix;
@@ -69,28 +66,10 @@ class Database_Instance extends Database_Abstract
 	}
 
 	protected function get_common($table, $values = "*", $condition = false, $params = false) {
-		$params = $params !== false ? (array) $params : array();
-		if ($table == 'tmp' && !empty($this->temp_params)) {
-			$params = array_merge($this->temp_params, $params);
-		}
-
-		$query = $this->prepare_select_query($table, $values, $condition);
-
-		$data = $this->query($query, $params);
-
-		if ($this->counter_lock) {
-			$count = $this->query("SELECT FOUND_ROWS()");
-			$this->counter = (int) current(current($count));
-			$this->counter_lock = false;
-		}
-
-		return $data;
-	}
-
-	protected function prepare_select_query($table, $values = "*", $condition = false) {
 		if (!is_array($values)) {
 			$values = preg_split('/\s*,\s*/', $values);
 		}
+		$alias = $this->make_alias($table);
 
 		foreach ($values as &$value) {
 			if (
@@ -107,12 +86,7 @@ class Database_Instance extends Database_Abstract
 		if ($this->counter_lock) {
 			$query .= "SQL_CALC_FOUND_ROWS ";
 		}
-		if ($table != 'tmp' || empty($this->temp_table)) {
-			$alias = preg_replace('/(?<!^|_)./ui', '', $table);
-			$query .= "$values FROM `{$this->prefix}$table` AS `$alias`";
-		} else {
-			$query .= "$values FROM " . $this->temp_table;
-		}
+		$query .= "$values FROM `{$this->prefix}$table` AS `$alias`";
 
 		foreach ($this->join as $join) {
 			$query .= " LEFT JOIN `$join[table]` AS `$join[alias]` ON $join[condition]";
@@ -162,6 +136,14 @@ class Database_Instance extends Database_Abstract
 			$query .= " LIMIT $from $this->limit";
 		}
 
+		$data = $this->query($query, $params);
+
+		if ($this->counter_lock) {
+			$count = $this->query("SELECT FOUND_ROWS()");
+			$this->counter = (int) current(current($count));
+			$this->counter_lock = false;
+		}
+
 		$this->order = array();
 		$this->order_type = array();
 		$this->group = array();
@@ -169,17 +151,8 @@ class Database_Instance extends Database_Abstract
 		$this->limit = false;
 		$this->join = array();
 		$this->filter = array();
-		$this->temp_table = false;
-		$this->temp_params = array();
 
-		return $query;
-	}
-
-	public function make_temp($table, $values = "*", $condition = false, $params = false) {
-		$temp_query = $this->prepare_select_query($table, $values, $condition);
-		$this->temp_table = ' (' . $temp_query . ') as tmp ';
-		$this->temp_params = $params !== false ? (array) $params : array();
-		return $this;
+		return $data;
 	}
 
 	public function get_table($table, $values = "*", $condition = false, $params = false) {
@@ -422,7 +395,7 @@ class Database_Instance extends Database_Abstract
 	public function join ($table, $condition) {
 		$this->join[] = array(
 			'table' => $table,
-			'alias' => preg_replace('/(?<!^|_)./ui', '', $table),
+			'alias' => $this->make_alias($table),
 			'condition' => $condition,
 		);
 
@@ -516,5 +489,9 @@ class Database_Instance extends Database_Abstract
 		$this->transaction = false;
 
 		return true;
+	}
+
+	protected function make_alias($table) {
+		return preg_replace('/(?<!^|_)./ui', '', $table);
 	}
 }
