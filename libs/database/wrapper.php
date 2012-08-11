@@ -42,6 +42,10 @@ class Database
 		return self::db()->sql($query, $params);
 	}
 
+	public static function make_temp($table, $values = '*', $condition = false, $params = false) {
+		return self::db()->make_temp($table, $values, $condition, $params);
+	}
+
 	public static function get_table ($table, $values = '*', $condition = false, $params = false) {
 		return self::db()->get_table($table, $values, $condition, $params);
 	}
