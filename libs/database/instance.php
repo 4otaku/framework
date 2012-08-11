@@ -69,6 +69,7 @@ class Database_Instance extends Database_Abstract
 		if (!is_array($values)) {
 			$values = preg_split('/\s*,\s*/', $values);
 		}
+		$alias = $this->make_alias($table);
 
 		foreach ($values as &$value) {
 			if (
@@ -76,7 +77,7 @@ class Database_Instance extends Database_Abstract
 				strpos($value, ".") === false &&
 				strpos($value, "`") === false
 			) {
-				$value = "`$value`";
+				$value = $alias . ".`$value`";
 			}
 		}
 		$values = implode(",", $values);
@@ -85,7 +86,6 @@ class Database_Instance extends Database_Abstract
 		if ($this->counter_lock) {
 			$query .= "SQL_CALC_FOUND_ROWS ";
 		}
-		$alias = preg_replace('/(?<!^|_)./ui', '', $table);
 		$query .= "$values FROM `{$this->prefix}$table` AS `$alias`";
 
 		foreach ($this->join as $join) {
@@ -395,7 +395,7 @@ class Database_Instance extends Database_Abstract
 	public function join ($table, $condition) {
 		$this->join[] = array(
 			'table' => $table,
-			'alias' => preg_replace('/(?<!^|_)./ui', '', $table),
+			'alias' => $this->make_alias($table),
 			'condition' => $condition,
 		);
 
@@ -489,5 +489,9 @@ class Database_Instance extends Database_Abstract
 		$this->transaction = false;
 
 		return true;
+	}
+
+	protected function make_alias($table) {
+		return preg_replace('/(?<!^|_)./ui', '', $table);
 	}
 }
