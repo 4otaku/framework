@@ -88,12 +88,16 @@ class Text
 		return $this;
 	}
 
-	public function format() {
+	public function format($rss = false) {
 		$this->text = str_replace("\r", '', $this->text);
-		$this->bb2html();
+		$this->bb2html($rss);
 		$this->links2html();
 		$this->text = nl2br($this->text);
 		return $this;
+	}
+
+	public function format_rss() {
+		return $this->format(true);
 	}
 
 	public function links2html() {
@@ -175,7 +179,7 @@ class Text
 		return $this;
 	}
 
-	public function bb2html() {
+	public function bb2html($rss = false) {
 		while (preg_match_all('/\[([a-zA-Z]*)=?([^\n]*?)\](.*?)\[\/\1\]/is', $this->text, $matches)) {
 			foreach ($matches[0] as $key => $match) {
 				list($tag, $param, $innertext) =
@@ -215,10 +219,14 @@ class Text
 							'/><br />';
 						break;
 			        case 'spoiler':
-						$replacement = '<div class="mini-shell"><div class="handler" width="100%">' .
-							'<span class="sign">↓</span> <a href="#" class="disabled">' .
-							str_replace(array('[', ']'), array('', ''), $param) . '</a></div>' .
-							'<div class="text hidden">' . ltrim($innertext) . '</div></div>';
+						if ($rss) {
+							$replacement = '[Спойлер]' . $param . '[/Спойлер]';
+						} else {
+							$replacement = '<div class="mini-shell"><div class="handler" width="100%">' .
+								'<span class="sign">↓</span> <a href="#" class="disabled">' .
+								str_replace(array('[', ']'), array('', ''), $param) . '</a></div>' .
+								'<div class="text hidden">' . ltrim($innertext) . '</div></div>';
+						}
 						break;
 				}
 				$this->text = str_replace($match, $replacement, $this->text);
