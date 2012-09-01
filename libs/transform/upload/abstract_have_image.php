@@ -7,8 +7,8 @@ abstract class Transform_Upload_Abstract_Have_Image extends Transform_Upload_Abs
 
 	protected $sizes = false;
 
-	public function __construct($file, $name) {
-		parent::__construct($file, $name);
+	public function __construct($file, $name, $base_path = false) {
+		parent::__construct($file, $name, $base_path);
 
 		$this->info = getimagesize($this->file);
 	}

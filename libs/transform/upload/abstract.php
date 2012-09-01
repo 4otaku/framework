@@ -5,12 +5,11 @@ abstract class Transform_Upload_Abstract
 	protected $name;
 	protected $file;
 	protected $size;
-
 	protected $unlink;
-
 	protected $result = array('success' => true);
+	protected $base_path = null;
 
-	public function __construct($file, $name) {
+	public function __construct($file, $name, $base_path = false) {
 		if (!@is_file($file)) {
 			$file = $this->create_temp_file($file);
 		}
@@ -18,6 +17,14 @@ abstract class Transform_Upload_Abstract
 		$this->size = filesize($file);
 		$this->name = $name;
 		$this->file = $file;
+
+		if (!empty($base_path)) {
+			$this->base_path = $base_path;
+		}
+	}
+
+	protected function get_base_path() {
+		return $this->base_path;
 	}
 
 	abstract protected function process();
