@@ -25,12 +25,12 @@ class Cron
 
 		foreach ($tasks as $task) {
 
-			self::process($task['id'], $task['class'], $task['function']);
-
 			$period = new Text($task['period']);
 			$nexttime = self::$db->unix_to_date($period->to_time() - 15);
 			self::$db->update('cron', array('last_time' => $nexttime),
 				'id = ?', $task['id']);
+
+			self::process($task['id'], $task['class'], $task['function']);
 		}
 	}
 }
