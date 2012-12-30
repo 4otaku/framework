@@ -215,7 +215,7 @@ class Text
 						$replacement = '<img src="' .
 							$innertext . '" ' .
 							(is_numeric($param[0]) ? 'width="' . $param[0] . '" ' : '') .
-							(is_numeric($param[1]) ? 'height="' . $param[1] . '" ' : '') .
+							(isset($param[1]) && is_numeric($param[1]) ? 'height="' . $param[1] . '" ' : '') .
 							'/><br />';
 						break;
 			        case 'spoiler':
