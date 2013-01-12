@@ -240,6 +240,6 @@ class Text
 	}
 
 	public function __toString() {
-		return $this->text;
+		return (string) $this->text;
 	}
 }
