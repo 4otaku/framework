@@ -348,12 +348,8 @@ class Database_Instance extends Database_Abstract
 		$query = "UPDATE `{$this->prefix}$table` SET ";
 
 		foreach ($keys as $id => $key) {
-			if ($values[$id] instanceof Database_Action) {
-				if ($values[$id]->is(Database_Action::INCREMENT)) {
-					$query .= "`$key` = `$key`+1,";
-				} elseif ($values[$id]->is(Database_Action::DECREMENT)) {
-					$query .= "`$key` = `$key`-1,";
-				}
+			if ($values[$id] instanceof Database_Action_Abstract) {
+				$query .= $values[$id]->get_query_for($key) . ",";
 				unset($values[$id]);
 			} else {
 				$query .= "`$key` = ?,";
