@@ -5,8 +5,8 @@ class Cron
 	protected static $db;
 	protected static $workers = array();
 
-	public static function process($class, $function, $id = 0) {
-
+	public static function process($class, $function, $id = 0)
+	{
 		$class = 'Cron_' . ucfirst($class);
 
 		if (empty(self::$workers[$class])) {
@@ -16,8 +16,14 @@ class Cron
 		self::$workers[$class]->execute($id, $function);
 	}
 
-	public static function process_db($db) {
+	public static function set_db($db)
+	{
 		self::$db = Database::db($db);
+	}
+
+	public static function process_db($db)
+	{
+		self::set_db($db);
 
 		$tasks = self::$db->order('id', 'asc')->get_table('cron',
 			array('id', 'class', 'function', 'period'),
