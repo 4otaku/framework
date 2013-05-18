@@ -5,9 +5,9 @@ class Cron
 	protected static $db;
 	protected static $workers = array();
 
-	public static function process($id, $class, $function) {
+	public static function process($class, $function, $id = 0) {
 
-		$class = 'Cron_' . $class;
+		$class = 'Cron_' . ucfirst($class);
 
 		if (empty(self::$workers[$class])) {
 			self::$workers[$class] = new $class(self::$db);
@@ -30,7 +30,7 @@ class Cron
 			self::$db->update('cron', array('last_time' => $nexttime),
 				'id = ?', $task['id']);
 
-			self::process($task['id'], $task['class'], $task['function']);
+			self::process($task['class'], $task['function'], $task['id']);
 		}
 	}
 }
