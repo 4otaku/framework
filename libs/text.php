@@ -106,6 +106,12 @@ class Text
 		return $this;
 	}
 
+	public function links2bb() {
+		$this->text = preg_replace(self::URL_REGEX,
+			'[url=$0]$0[/url]', $this->text);
+		return $this;
+	}
+
 	public function cut_words($length = 25, $break = '<wbr />') {
 		$parts = preg_split('/(<[^>]*>|\s)/', $this->text, null, PREG_SPLIT_DELIM_CAPTURE);
 
