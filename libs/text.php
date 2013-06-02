@@ -3,6 +3,7 @@
 class Text
 {
 	const URL_REGEX = '/(?<!href=\")(?<!src=\")(https?|ftp):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:\/~\+#!]*[\w\-\@?^=%&amp;\/~\+#!])?(?!<\/a>)/uis';
+	const URL_BB_REGEX = '/(?<!url=\")(?<!url=)(?<!url\])(?<!img\])(?<!src=\")(https?|ftp):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:\/~\+#!]*[\w\-\@?^=%&amp;\/~\+#!])?(?!<\/a>)/uis';
 	protected $alfavitlover = array('ё','й','ц','у','к','е','н','г', 'ш','щ','з','х','ъ','ф','ы','в', 'а','п','р','о','л','д','ж','э', 'я','ч','с','м','и','т','ь','б','ю');
 	protected $alfavitupper = array('Ё','Й','Ц','У','К','Е','Н','Г', 'Ш','Щ','З','Х','Ъ','Ф','Ы','В', 'А','П','Р','О','Л','Д','Ж','Э', 'Я','Ч','С','М','И','Т','Ь','Б','Ю');
 
@@ -107,7 +108,7 @@ class Text
 	}
 
 	public function links2bb() {
-		$this->text = preg_replace(self::URL_REGEX,
+		$this->text = preg_replace(self::URL_BB_REGEX,
 			'[url=$0]$0[/url]', $this->text);
 		return $this;
 	}
