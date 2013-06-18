@@ -41,7 +41,6 @@ class Database_Sorter
 	}
 
 	public function apply_operation($string, $type, $value) {
-
 		switch ($type) {
 			case 'divide':
 				$field = '`' . $value . '`';
@@ -51,6 +50,7 @@ class Database_Sorter
 				}
 
 				$string .= '/' . $field;
+				break;
 			case 'multiply':
 				$field = '`' . $value . '`';
 
@@ -59,6 +59,7 @@ class Database_Sorter
 				}
 
 				$string .= '*' . $field;
+				break;
 			case 'sum':
 				$field = '`' . $value . '`';
 
@@ -67,8 +68,10 @@ class Database_Sorter
 				}
 
 				$string .= ' + ' . $field;
+				break;
 			case 'random':
 				$string = 'RAND()';
+				break;
 			default:
 				break;
 		}
