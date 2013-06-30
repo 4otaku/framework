@@ -202,11 +202,8 @@ class Text
 						$replacement = '<s>' . $innertext . '</s>';
 						break;
 					case 'size':
-						if ($param{0} != '+' && $param{0} != '-') {
-							$param = '+' . $param;
-						}
-						$replacement = '<font size="' . $param . ';">' .
-							$innertext . '</font>';
+						$replacement = '<span style="font-size:' . $param . '%;">' .
+							$innertext . '</span>';
 						break;
 					case 'color':
 						$replacement = '<span style="color: ' . $param . ';">' .
