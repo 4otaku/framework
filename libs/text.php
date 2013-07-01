@@ -141,7 +141,7 @@ class Text
 	public function cut_long($length, $prepend = ' ...', $cut_words = false) {
 		if (
 			strlen($this->text) < $length ||
-			!preg_match('/^(&\p{L}{1,8};|(<.+?>)*.){0,'.$length.'}(.*)/ius', $this->text, $match)
+			!preg_match('/^((?:&\p{L}{1,8};|(?:<.+?>)*.){0,'.$length.'})(.*)/ius', $this->text, $match)
 		) {
 			if (!empty($cut_words)) {
 				$this->cut_words((int) $cut_words);
@@ -149,8 +149,8 @@ class Text
 			return $this;
 		}
 
-		preg_match_all('/<([^\s>\/]+)(?![^>]*\/>)[^>]*>/is', $match[0], $opening_tags);
-		preg_match_all('/<\/([^\s>]+)[^>]*>/is', $match[0], $ending_tags);
+		preg_match_all('/<([^\s>\/]+)(?![^>]*\/>)[^>]*>/is', $match[1], $opening_tags);
+		preg_match_all('/<\/([^\s>]+)[^>]*>/is', $match[1], $ending_tags);
 
 		$tags = array();
 		foreach ($opening_tags[1] as $tag_name) {
@@ -165,7 +165,7 @@ class Text
 			$tags[$tag_name]--;
 		}
 
-		$this->text = $match[0];
+		$this->text = $match[1];
 		if (!empty($cut_words)) {
 			$this->cut_words((int) $cut_words);
 		}
