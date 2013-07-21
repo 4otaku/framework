@@ -73,7 +73,7 @@ class Http
 	}
 
 	public function enable_limit($limit) {
-		$this->range = '1-' . $limit;
+		$this->range = '0-' . $limit;
 
 		return $this;
 	}
