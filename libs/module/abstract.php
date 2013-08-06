@@ -76,13 +76,17 @@ abstract class Module_Abstract
 			$request->add($module->gather_request());
 		}
 
-		$request->add($this->make_request());
+		$add = $this->make_request();
+		$add = is_object($add) ? [$add] : $add;
+		foreach ($add as $item) {
+			$request->add($item);
+		}
 
 		return $request;
 	}
 
 	protected function make_request() {
-		return false;
+		return array();
 	}
 
 	public function recieve_data($data) {

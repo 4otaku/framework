@@ -1,8 +1,15 @@
 <?php
-/**
- * Created by JetBrains PhpStorm.
- * User: derinov
- * Date: 05.08.13
- * Time: 9:33
- * To change this template use File | Settings | File Templates.
- */
+
+class Request_Item extends Request_Read
+{
+	public function __construct($api = false, $object = false, $data = [],
+	                            $method = 'recieve_data') {
+		$data['per_page'] = 1;
+		parent::__construct($api, $object, $data, $method);
+	}
+
+	public function pass_data($data) {
+		$data['data'] = reset($data['data']);
+		parent::pass_data($data);
+	}
+}

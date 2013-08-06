@@ -162,7 +162,7 @@ class Session
 	protected function load_api() {
 		if (!$this->api_loaded) {
 			// Пробуем считаем пользователя из api
-			$request = new Request('user', $this, ['cookie' => $this->hash]);
+			$request = new Request_Read('user', $this, ['cookie' => $this->hash]);
 			$request->perform();
 			$this->api_loaded = true;
 		}
@@ -177,6 +177,6 @@ class Session
 		unset($config['github']);
 		$data['user']['moderator'] = (int) $this->is_moderator();
 
-		return json_encode(array_replace_recursive($data, $config));
+		return json_encode(array_replace_recursive($config, $data));
 	}
 }
