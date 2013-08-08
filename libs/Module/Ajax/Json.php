@@ -1,8 +1,10 @@
 <?php
 
-namespace Otaku\Framework;
+namespace Otaku\Framework\Module;
 
-abstract class ModuleAjaxJson extends ModuleAbstract
+use Otaku\Framework\TraitOutputJson;
+
+abstract class AjaxJson extends Base
 {
 	use TraitOutputJson;
 

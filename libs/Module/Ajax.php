@@ -1,8 +1,11 @@
 <?php
 
-namespace Otaku\Framework;
+namespace Otaku\Framework\Module;
 
-class ModuleAjax extends ModuleAbstract
+use Otaku\Framework\Query;
+use Otaku\Framework\TraitOutputPlain;
+
+class Ajax extends Base
 {
 	use TraitOutputPlain;
 
@@ -20,9 +23,9 @@ class ModuleAjax extends ModuleAbstract
 
 		if (!class_exists($class)) {
 			if ($query->get('format') == 'json') {
-				return new ModuleAjaxJsonError($query);
+				return new AjaxJsonError($query);
 			} else {
-				return new ModuleAjaxError($query);
+				return new AjaxError($query);
 			}
 		}
 

@@ -16,9 +16,9 @@ trait TraitOutputTpl
 		$this->set_param('js', $this->get_meta_address('js', $js));
 		$this->set_param('prefetch', $this->get_prefetch());
 
-		$tpl_name = explode('_', strtolower(get_called_class()));
-		array_shift($tpl_name);
-		$tpl_name = implode(SL, $tpl_name);
+		$tpl_name = preg_replace('/.*Module\\\\/', '', get_called_class());
+		$tpl_name = preg_split('/(?<!^)(?=[A-Z])/', $tpl_name);
+		$tpl_name = strtolower(implode(SL, $tpl_name));
 
 		return $this->get_tpl()->draw($tpl_name, true);
 	}

@@ -1,8 +1,12 @@
 <?php
 
-namespace Otaku\Framework;
+namespace Otaku\Framework\Module;
 
-abstract class ModuleDownloadAbstract extends ModuleAbstract
+use Otaku\Framework\Query;
+use Otaku\Framework\TraitOutputDownload;
+use Otaku\Framework\Config;
+
+abstract class DownloadAbstract extends Base
 {
 	use TraitOutputDownload;
 

@@ -1,17 +1,18 @@
 <?php
 
-namespace Otaku\Framework;
+namespace Otaku\Framework\Module;
 
-class ModuleContainer extends ModuleAbstract
+use Otaku\Framework\TraitOutputContainer;
+use Otaku\Framework\QueryDummy;
+
+class Container extends Base
 {
 	use TraitOutputContainer;
 
 	protected $class_name;
 
 	public function __construct($type = '', $disabled = false) {
-		$type = explode('_', $type);
-		$type = array_map('ucfirst', $type);
-		$this->class_name = 'Module_' . implode('_', $type);
+		$this->class_name = $type;
 
 		parent::__construct(new QueryDummy(), $disabled = false);
 	}

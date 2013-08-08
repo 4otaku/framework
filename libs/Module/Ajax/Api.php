@@ -1,8 +1,8 @@
 <?php
 
-namespace Otaku\Framework;
+namespace Otaku\Framework\Module;
 
-abstract class ModuleAjaxApi extends ModuleAjaxJson
+abstract class AjaxApi extends AjaxJson
 {
 	public function recieve_data($data) {
 		$this->set_success($data['success']);

@@ -1,8 +1,11 @@
 <?php
 
-namespace Otaku\Framework;
+namespace Otaku\Framework\Module;
 
-abstract class ModuleAbstract
+use Otaku\Framework\Query;
+use Otaku\Framework\Request;
+
+abstract class Base
 {
 	protected $modules = [];
 	protected $params = [];

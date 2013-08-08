@@ -1,8 +1,11 @@
 <?php
 
-namespace Otaku\Framework;
+namespace Otaku\Framework\Module;
 
-class ModuleAjaxJsonError extends ModuleAjaxJson
+use Otaku\Framework\Query;
+use Otaku\Framework\Error;
+
+class AjaxJsonError extends AjaxJson
 {
 	public function __construct(Query $query, $disabled = false) {
 		parent::__construct($query, $disabled);

@@ -16,6 +16,7 @@ class Autoload
 
 	public function find($class)
 	{
+		var_dump($class);
 		$class = explode('\\', $class);
 		// remove main namespace from class
 		$common = array_shift($class);

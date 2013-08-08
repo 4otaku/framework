@@ -1,8 +1,10 @@
 <?php
 
-namespace Otaku\Framework;
+namespace Otaku\Framework\Module;
 
-abstract class ModuleHtmlAbstract extends ModuleAbstract
+use Otaku\Framework\TraitOutputTpl;
+
+abstract class HtmlAbstract extends Base
 {
 	use TraitOutputTpl;
 }
