@@ -34,8 +34,8 @@ abstract class DownloadAbstract extends Base
 			return;
 		}
 
-		$api_url = Config::get('api', 'url');
-		$prefix = !Config::get('api', 'inner') ?
+		$api_url = Config::getInstance()->get('api', 'url');
+		$prefix = !Config::getInstance()->get('api', 'inner') ?
 			'http://' . parse_url($api_url, PHP_URL_HOST) . '/' :
 			ROOT_DIR . SL . 'api' . SL;
 

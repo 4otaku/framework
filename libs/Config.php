@@ -1,18 +1,18 @@
 <?php
 
-namespace otaku\framework;
+namespace Otaku\Framework;
 
-class Config
+class Config extends Singleton
 {
-	protected static $config = array();
+	protected $config = array();
 
-	protected static $protected = array();
+	protected $protected = array();
 
-	public static function add($array, $protected = false)
+	public function add($array, $protected = false)
 	{
 		foreach ($array as $top => $values) {
 			foreach ($values as $key => $value) {
-				if (!empty(self::$protected[$top][$key])) {
+				if (!empty($this->protected[$top][$key])) {
 					continue;
 				}
 
@@ -31,13 +31,13 @@ class Config
 					}
 				}
 
-				self::$config[$top][$key] = $value;
-				self::$protected[$top][$key] = $protected;
+				$this->config[$top][$key] = $value;
+				$this->protected[$top][$key] = $protected;
 			}
 		}
 	}
 
-	public static function parse($file, $protected = false)
+	public function parse($file, $protected = false)
 	{
 		if (!file_exists($file))
 		{
@@ -46,24 +46,24 @@ class Config
 		}
 
 		$data = (array) parse_ini_file($file, true);
-		self::add($data, $protected);
+		$this->add($data, $protected);
 	}
 
-	public static function get($section = false, $key = false, $default = null)
+	public function get($section = false, $key = false, $default = null)
 	{
 		if (empty($section))
 		{
-			return self::$config;
+			return $this->config;
 		}
 
-		if (empty($key) && isset(self::$config[$section]))
+		if (empty($key) && isset($this->config[$section]))
 		{
-			return self::$config[$section];
+			return $this->config[$section];
 		}
 
-		if (isset(self::$config[$section]) && isset(self::$config[$section][$key]))
+		if (isset($this->config[$section]) && isset($this->config[$section][$key]))
 		{
-			return self::$config[$section][$key];
+			return $this->config[$section][$key];
 		}
 
 		return $default;

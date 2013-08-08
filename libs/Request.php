@@ -24,8 +24,8 @@ class Request
 		}
 
 		$this->data = (array) $data;
-		$this->data['cookie'] = Session::get_instance()->get_hash();
-		$this->data['ip'] = Session::get_instance()->get_ip();
+		$this->data['cookie'] = Session::getInstance()->get_hash();
+		$this->data['ip'] = Session::getInstance()->get_ip();
 
 		if ($object && is_callable(array($object, $method))) {
 			$this->hash = md5($this->api . serialize($this->data));
@@ -102,14 +102,15 @@ class Request
 
 	public function do_request($data)
 	{
-		$url = Config::get('api', 'url');
+		$config = Config::getInstance();
+		$url = $config->get('api', 'url');
 		$api = $this->get_api();
 
 		if (!$api) {
 			return;
 		}
 
-		if (!Config::get('api', 'inner')) {
+		if (!$config->get('api', 'inner')) {
 			$url .= '/' . str_replace('_', '/', $api);
 
 			if (function_exists('igbinary_serialize')) {

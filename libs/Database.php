@@ -18,20 +18,19 @@ class Database
 
 	// Создает еще не созданный объект БД
 	protected static function init_db ($name) {
-		$config = array(
-			'server' => Config::get('db', 'host'),
-			'login' => Config::get('db', 'user'),
-			'password' => Config::get('db', 'pass'),
-			'database' => Config::get('db', $name . '_db'),
-		);
+		$config = Config::getInstance();
+		$server = $config->get('db', 'host');
+		$login = $config->get('db', 'user');
+		$password = $config->get('db', 'pass');
+		$database = $config->get('db', $name . '_db');
 
-		if (empty($config['database'])) {
+		if (empty($database)) {
 			die('Конфиг для базы данных ' . $name . ' не найден.');
 		}
 
-		$dsn = 'mysql:dbname=' . $config['database'] . ';host=' . $config['server'];
+		$dsn = 'mysql:dbname=' . $database . ';host=' . $server;
 		$options = array(\PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8');
-		$worker = new \PDO($dsn, $config['login'], $config['password'], $options);
+		$worker = new \PDO($dsn, $login, $password, $options);
 
 		$object = new DatabaseInstance($worker);
 

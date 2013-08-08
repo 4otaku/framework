@@ -22,7 +22,7 @@ abstract class CronAbstract
 		} catch (Error $e) {
 			$mail = new Mail();
 			$mail->text(serialize($e))
-				->send(Config::get('notify', 'mail'));
+				->send(Config::getInstance()->get('notify', 'mail'));
 		}
 	}
 }

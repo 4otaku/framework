@@ -2,7 +2,7 @@
 
 namespace Otaku\Framework;
 
-class Session
+class Session extends Singleton
 {
 	// Домен для куков
 	protected $domain = '';
@@ -22,11 +22,10 @@ class Session
 
 	protected $moderator = false;
 
-	protected static $instance;
-
-	private function __construct()
+	public function init()
 	{
-		$this->name = Config::get('cookie', 'name', $this->name);
+		$config = Config::getInstance();
+		$this->name = $config->get('cookie', 'name', $this->name);
 
 		// Удалим все левые куки, нечего захламлять пространство
 		foreach ($_COOKIE as $key => $cook) {
@@ -35,8 +34,8 @@ class Session
 			}
 		}
 
-		if (Config::get('site', 'domain') != 'localhost') {
-			$this->domain = Config::get('site', 'domain');
+		if ($config->get('site', 'domain') != 'localhost') {
+			$this->domain = $config->get('site', 'domain');
 		}
 
 		// Хэш. Берем либо из cookie, если валиден, либо генерим новый
@@ -63,18 +62,9 @@ class Session
 		}
 	}
 
-	public static function get_instance()
+	public function is_moderator()
 	{
-		if (empty(self::$instance)) {
-			self::$instance = new Session();
-		}
-
-		return self::$instance;
-	}
-
-	public static function is_moderator()
-	{
-		return self::get_instance()->load_api()->moderator;
+		return $this->load_api()->moderator;
 	}
 
 	protected function update_lifetime()
@@ -174,7 +164,7 @@ class Session
 	public function to_json()
 	{
 		$data = $this->get_data();
-		$config = Config::get();
+		$config = Config::getInstance()->get();
 		unset($config['db']);
 		unset($config['github']);
 		$data['user']['moderator'] = (int) $this->is_moderator();
