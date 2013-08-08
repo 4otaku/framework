@@ -25,7 +25,7 @@ trait TraitOutputTpl
 
 	private function get_tpl() {
 		if (empty($this->tpl)) {
-			$this->tpl = new RainTPL();
+			$this->tpl = new \RainTPL();
 		}
 
 		return $this->tpl;

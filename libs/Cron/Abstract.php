@@ -6,7 +6,7 @@ abstract class CronAbstract
 {
 	protected $db;
 
-	public function __construct(Database_Instance $db) {
+	public function __construct(DatabaseInstance $db) {
 		$this->db = $db;
 	}
 
@@ -19,7 +19,7 @@ abstract class CronAbstract
 				'exec_time' => microtime(true) - $time,
 				'exec_memory' => $memory,
 			));
-		} catch (Error_Cron $e) {
+		} catch (Error $e) {
 			$mail = new Mail();
 			$mail->text(serialize($e))
 				->send(Config::get('notify', 'mail'));

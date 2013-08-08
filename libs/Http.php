@@ -33,7 +33,7 @@ class Http
 
 	public function __construct ($options = array(), $headers = array()) {
 
-		$worker = new MultiRequest_Handler();
+		$worker = new \MultiRequest_Handler();
 		$worker->setConnectionsLimit(self::CONNECTIONS_LIMIT);
 		$worker->onRequestComplete(array($this, "save_headers"));
 		$worker->onRequestComplete(array($this, "save_data"));
@@ -55,7 +55,7 @@ class Http
 		$urls = (array) $urls;
 
 		foreach($urls as $url) {
-			$request = new MultiRequest_Request($url);
+			$request = new \MultiRequest_Request($url);
 
 			if ($this->range) {
 				$domain = parse_url($url, PHP_URL_HOST);

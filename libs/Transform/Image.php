@@ -11,7 +11,7 @@ class TransformImage
 			$name = self::get_worker_name();
 
 			return new $name($path);
-		} catch (Exception $e) {
+		} catch (\Exception $e) {
 			throw new ErrorImage(ErrorImage::BROKEN_IMAGE);
 		}
 	}

@@ -12,12 +12,12 @@ class CacheMemcached implements CacheInterfaceSingle, CacheInterfaceArray
 	public function __construct ($config = array()) {
 
 		if (class_exists("Memcached", false)) {
-			$this->memcached = new Memcached("default_fateline");
+			$this->memcached = new \Memcached("default_fateline");
 			$this->memcached->addServer("localhost", 11211);
 
-			$serializer = Memcached::SERIALIZER_PHP;
+			$serializer = \Memcached::SERIALIZER_PHP;
 
-			$this->memcached->setOption(Memcached::OPT_SERIALIZER, $serializer);
+			$this->memcached->setOption(\Memcached::OPT_SERIALIZER, $serializer);
 		} else {
 			$this->able_to_work = false;
 		}
@@ -36,7 +36,7 @@ class CacheMemcached implements CacheInterfaceSingle, CacheInterfaceArray
 	public function get ($key) {
 		$value = $this->memcached->get($key);
 
-		if ($this->memcached->getResultCode() === MEMCACHED::RES_NOTFOUND) {
+		if ($this->memcached->getResultCode() === \Memcached::RES_NOTFOUND) {
 			$value = false;
 		}
 

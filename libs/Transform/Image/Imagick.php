@@ -7,7 +7,7 @@ class TransformImageImagick extends TransformImageAbstractAnimation
 	protected $worker;
 
 	public function __construct($path) {
-		$this->set_worker(new Imagick($path));
+		$this->set_worker(new \Imagick($path));
 	}
 
 	public function __call($name, $arguments) {
@@ -15,12 +15,12 @@ class TransformImageImagick extends TransformImageAbstractAnimation
 			$new_object = clone $this;
 			$new_object->set_worker($this->worker->clone());
 			return $new_object;
-		} 
+		}
 
 		throw new ErrorImage(ErrorImage::UNEXPECTED_FUNCTION_CALL);
 	}
 
-	public function set_worker(Imagick $worker) {
+	public function set_worker(\Imagick $worker) {
 		$this->worker = $worker;
 	}
 
@@ -29,11 +29,11 @@ class TransformImageImagick extends TransformImageAbstractAnimation
 	}
 
 	public function get_composite_over() {
-		return Imagick::COMPOSITE_OVER;
+		return \Imagick::COMPOSITE_OVER;
 	}
 
 	public function get_compression_jpeg() {
-		return Imagick::COMPRESSION_JPEG;
+		return \Imagick::COMPRESSION_JPEG;
 	}
 
 	public function get_image_width() {

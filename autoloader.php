@@ -11,23 +11,32 @@ class Autoload
 		$this->external = (string) $external;
 
 		spl_autoload_register(array($this, 'find'), false);
+		spl_autoload_register(array($this, 'external'), false);
 	}
 
 	public function find($class)
 	{
 		$class = explode('\\', $class);
-		// remove main namespace from classname
-		array_shift($class);
+		// remove main namespace from class
+		$common = array_shift($class);
+		if ($common != 'Otaku') {
+			return;
+		}
 		// second namespace level points to a project
 		$base = array_shift($class);
 		if (!isset($this->spaces[$base])) {
 			return;
 		}
-		$classname = array_pop($class);
-		$classname = preg_split('/(?<!^)(?=[A-Z])/', $classname);
-		$class = array_merge($class, $classname);
+		$className = array_pop($class);
+		$className = preg_split('/(?<!^)(?=[A-Z])/', $className);
+		$class = array_merge($class, $className);
 		$class = implode(SL, $class);
 
 		require_once $this->spaces[$base] . SL . $class . '.php';
+	}
+
+	public function external($class)
+	{
+		require_once $this->external . SL . $class . '.php';
 	}
 }

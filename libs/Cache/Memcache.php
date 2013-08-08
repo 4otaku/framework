@@ -16,7 +16,7 @@ class CacheMemcache implements CacheInterfaceSingle
 	public function __construct ($config = array()) {
 
 		if (class_exists("Memcache", false)) {
-			$this->memcache = new Memcache();
+			$this->memcache = new \Memcache();
 
 			$this->memcache->connect("127.0.0.1");
 
