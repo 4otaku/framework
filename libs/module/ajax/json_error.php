@@ -1,5 +1,7 @@
 <?php
 
+namespace otaku\framework;
+
 class Module_Ajax_Json_Error extends Module_Ajax_Json
 {
 	public function __construct(Query $query, $disabled = false) {

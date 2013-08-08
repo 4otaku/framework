@@ -1,5 +1,7 @@
 <?php
 
+namespace otaku\framework;
+
 trait Trait_Output_Download
 {
 	protected function format_data() {

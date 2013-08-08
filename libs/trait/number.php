@@ -1,5 +1,7 @@
 <?php
 
+namespace otaku\framework;
+
 trait Trait_Number
 {
 	protected function wcase($count, $form1, $form2, $form3) {

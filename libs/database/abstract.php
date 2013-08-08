@@ -1,5 +1,7 @@
 <?php
 
+namespace otaku\framework;
+
 abstract class Database_Abstract
 {
 	// Последний запрос и параметры от него

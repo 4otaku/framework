@@ -1,5 +1,7 @@
 <?php
 
+namespace otaku\framework;
+
 class Transform_Image
 {
 	protected static $worker_name;

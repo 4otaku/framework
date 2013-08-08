@@ -1,5 +1,7 @@
 <?php
 
+namespace otaku\framework;
+
 class Cache_Files implements Cache_Interface_Single
 {
 	const FOLDER = "files_cache";

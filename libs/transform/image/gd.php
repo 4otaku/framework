@@ -1,5 +1,7 @@
 <?php
 
+namespace otaku\framework;
+
 class Transform_Image_Gd extends Transform_Image_Abstract_Static
 {
 	protected $path;

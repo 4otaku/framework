@@ -1,5 +1,7 @@
 <?php
 
+namespace otaku\framework;
+
 trait Trait_File
 {
 	protected $size_types = array('б', 'кб', 'мб', 'гб');

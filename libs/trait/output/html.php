@@ -1,5 +1,7 @@
 <?php
 
+namespace otaku\framework;
+
 trait Trait_Output_Html
 {
 	public function get_css() {

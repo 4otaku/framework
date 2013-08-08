@@ -1,5 +1,7 @@
 <?php
 
+namespace otaku\framework;
+
 interface Request_Groupable
 {
 	public function can_group_with(Request $request);

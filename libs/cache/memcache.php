@@ -1,5 +1,7 @@
 <?php
 
+namespace otaku\framework;
+
 class Cache_Memcache implements Cache_Interface_Single
 {
 	const	COMPRESS = true,

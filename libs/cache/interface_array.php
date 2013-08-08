@@ -1,5 +1,7 @@
 <?php
 
+namespace otaku\framework;
+
 interface Cache_Interface_Array
 {
 	public function set_array ($keys, $values, $expire);

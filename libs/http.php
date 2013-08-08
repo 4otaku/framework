@@ -1,5 +1,7 @@
 <?php
 
+namespace otaku\framework;
+
 class Http
 {
 	const CONNECTIONS_LIMIT = 10;

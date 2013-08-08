@@ -1,5 +1,7 @@
 <?php
 
+namespace otaku\framework;
+
 class Database
 {
 	// Хранилище для объектов баз данных

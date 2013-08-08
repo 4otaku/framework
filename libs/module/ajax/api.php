@@ -1,5 +1,7 @@
 <?php
 
+namespace otaku\framework;
+
 abstract class Module_Ajax_Api extends Module_Ajax_Json
 {
 	public function recieve_data($data) {

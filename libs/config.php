@@ -1,5 +1,7 @@
 <?php
 
+namespace otaku\framework;
+
 class Config
 {
 	protected static $config = array();

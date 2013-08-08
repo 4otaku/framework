@@ -1,5 +1,7 @@
 <?php
 
+namespace otaku\framework;
+
 class Database_Action_Add extends Database_Action_Abstract
 {
 	public function get_query_for($key)

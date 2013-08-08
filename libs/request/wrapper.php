@@ -1,5 +1,7 @@
 <?php
 
+namespace otaku\framework;
+
 class Request
 {
 	protected $api = false;

@@ -1,5 +1,7 @@
 <?php
 
+namespace otaku\framework;
+
 class Request_Item extends Request_Read
 {
 	public function __construct($api = false, $object = false, $data = [],

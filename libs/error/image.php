@@ -1,5 +1,7 @@
 <?php
 
+namespace otaku\framework;
+
 class Error_Image extends Error_Upload
 {
 	const

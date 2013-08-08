@@ -1,5 +1,7 @@
 <?php
 
+namespace otaku\framework;
+
 interface Transform_Image_Interface
 {
 	public function __construct($path);

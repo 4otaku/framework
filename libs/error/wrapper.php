@@ -1,5 +1,7 @@
 <?php
 
+namespace otaku\framework;
+
 class Error extends Exception
 {
 	const

@@ -1,5 +1,7 @@
 <?php
 
+namespace otaku\framework;
+
 abstract class Transform_Upload_Abstract
 {
 	protected $name;

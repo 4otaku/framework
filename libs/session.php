@@ -1,5 +1,7 @@
 <?php
 
+namespace otaku\framework;
+
 class Session
 {
 	// Домен для куков

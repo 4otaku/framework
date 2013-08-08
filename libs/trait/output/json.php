@@ -1,5 +1,7 @@
 <?php
 
+namespace otaku\framework;
+
 trait Trait_Output_Json
 {
 	private $success = false;

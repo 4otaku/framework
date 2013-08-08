@@ -1,5 +1,7 @@
 <?php
 
+namespace otaku\framework;
+
 class Query
 {
 	protected $url = array();

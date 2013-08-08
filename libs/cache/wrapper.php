@@ -1,5 +1,7 @@
 <?php
 
+namespace otaku\framework;
+
 class Cache
 {
 	// Базовый префикс, нужен чтобы избежать коллизий с кешем других сайтов

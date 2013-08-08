@@ -1,5 +1,7 @@
 <?php
 
+namespace otaku\framework;
+
 class Request_Update extends Request
 {
 	protected $priority = 1;

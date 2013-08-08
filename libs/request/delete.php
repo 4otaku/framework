@@ -1,5 +1,7 @@
 <?php
 
+namespace otaku\framework;
+
 class Request_Delete extends Request
 {
 	protected $priority = 3;

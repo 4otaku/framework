@@ -1,5 +1,7 @@
 <?php
 
+namespace otaku\framework;
+
 class Database_Instance extends Database_Abstract
 {
 	protected $worker;

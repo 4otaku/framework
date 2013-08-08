@@ -1,5 +1,7 @@
 <?php
 
+namespace otaku\framework;
+
 class Text
 {
 	const URL_REGEX = '/(?<!href=\")(?<!src=\")(https?|ftp):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:\/~\+#!]*[\w\-\@?^=%&amp;\/~\+#!])?(?!<\/a>)/uis';

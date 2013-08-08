@@ -1,5 +1,7 @@
 <?php
 
+namespace otaku\framework;
+
 class Request_Read_Multi extends Request
 {
 

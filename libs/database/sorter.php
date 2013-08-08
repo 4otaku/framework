@@ -1,5 +1,7 @@
 <?php
 
+namespace otaku\framework;
+
 class Database_Sorter
 {
 	protected $field;

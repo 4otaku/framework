@@ -1,5 +1,7 @@
 <?php
 
+namespace otaku\framework;
+
 class Cron
 {
 	protected static $db;

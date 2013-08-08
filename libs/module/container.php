@@ -1,5 +1,7 @@
 <?php
 
+namespace otaku\framework;
+
 class Module_Container extends Module_Abstract
 {
 	use Trait_Output_Container;

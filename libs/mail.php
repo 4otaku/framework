@@ -1,5 +1,7 @@
 <?php
 
+namespace otaku\framework;
+
 class Mail
 {
 	private $errstr;

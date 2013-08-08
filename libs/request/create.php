@@ -1,5 +1,7 @@
 <?php
 
+namespace otaku\framework;
+
 class Request_Create extends Request
 {
 	protected $priority = 2;

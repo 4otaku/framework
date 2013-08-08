@@ -1,5 +1,7 @@
 <?php
 
+namespace otaku\framework;
+
 class Module_Download extends Module_Abstract
 {
 	use Trait_Output_Plain;

@@ -1,5 +1,7 @@
 <?php
 
+namespace otaku\framework;
+
 interface Cache_Interface_Single
 {
 	public function set ($key, $value, $expire);

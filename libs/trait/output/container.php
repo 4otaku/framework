@@ -1,5 +1,7 @@
 <?php
 
+namespace otaku\framework;
+
 trait Trait_Output_Container
 {
 	use Trait_Output_Html;

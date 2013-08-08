@@ -1,5 +1,7 @@
 <?php
 
+namespace otaku\framework;
+
 abstract class Database_Action_Abstract
 {
 	protected $value = null;

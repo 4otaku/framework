@@ -1,5 +1,7 @@
 <?php
 
+namespace otaku\framework;
+
 class Cache_Dummy implements Cache_Interface_Single, Cache_Interface_Array
 {
 	public $able_to_work = true;

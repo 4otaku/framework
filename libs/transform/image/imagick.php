@@ -1,5 +1,7 @@
 <?php
 
+namespace otaku\framework;
+
 class Transform_Image_Imagick extends Transform_Image_Abstract_Animation
 {
 	protected $worker;

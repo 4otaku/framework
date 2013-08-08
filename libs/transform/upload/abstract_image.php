@@ -1,5 +1,7 @@
 <?php
 
+namespace otaku\framework;
+
 abstract class Transform_Upload_Abstract_Image extends Transform_Upload_Abstract_Have_Image
 {
 	protected function test_file() {

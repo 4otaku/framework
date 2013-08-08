@@ -1,5 +1,7 @@
 <?php
 
+namespace otaku\framework;
+
 abstract class Module_Download_Abstract extends Module_Abstract
 {
 	use Trait_Output_Download;
