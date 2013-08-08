@@ -14,6 +14,8 @@ trait TraitOutputTpl
 
 		$this->set_param('css', $this->get_meta_address('css', $css));
 		$this->set_param('js', $this->get_meta_address('js', $js));
+		$this->set_param('config', Config::getInstance());
+		$this->set_param('session', Session::getInstance());
 		$this->set_param('prefetch', $this->get_prefetch());
 
 		$tpl_name = preg_replace('/.*Module\\\\/', '', get_called_class());

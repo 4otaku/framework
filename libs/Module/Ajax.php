@@ -18,8 +18,8 @@ class Ajax extends Base
 			return array();
 		}
 
-		$class = implode('_', array_map('ucfirst', $url));
-		$class = 'ModuleAjax_' . $class;
+		$class = implode('', array_map('ucfirst', $url));
+		$class = __NAMESPACE__ . '\Ajax' . $class;
 
 		if (!class_exists($class)) {
 			if ($query->get('format') == 'json') {
