@@ -2,7 +2,7 @@
 
 namespace Otaku\Framework;
 
-class Transform_Image_Gd extends Transform_Image_Abstract_Static
+class TransformImageGd extends TransformImageAbstractStatic
 {
 	protected $path;
 	protected $data;
@@ -25,7 +25,7 @@ class Transform_Image_Gd extends Transform_Image_Abstract_Static
 			case 'png': $this->data = imagecreatefrompng($this->path); break;
 			case 'jpeg': $this->data = imagecreatefromjpeg($this->path); break;
 			case 'gif': $this->data = imagecreatefromgif($this->path); break;
-			default: throw new Error_Image(Error_Image::NOT_AN_IMAGE);
+			default: throw new ErrorImage(ErrorImage::NOT_AN_IMAGE);
 		}
 	}
 
@@ -34,7 +34,7 @@ class Transform_Image_Gd extends Transform_Image_Abstract_Static
 			return $this;
 		}
 
-		throw new Error_Image(Error_Image::UNEXPECTED_FUNCTION_CALL);
+		throw new ErrorImage(ErrorImage::UNEXPECTED_FUNCTION_CALL);
 	}
 
 	public function get_composite_over() {
@@ -108,7 +108,7 @@ class Transform_Image_Gd extends Transform_Image_Abstract_Static
 				);
 				break;
 			default:
-				throw new Error_Image(Error_Image::NOT_AN_IMAGE);
+				throw new ErrorImage(ErrorImage::NOT_AN_IMAGE);
 		}
 	}
 

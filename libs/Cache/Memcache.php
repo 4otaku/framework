@@ -2,7 +2,7 @@
 
 namespace Otaku\Framework;
 
-class Cache_Memcache implements Cache_Interface_Single
+class CacheMemcache implements CacheInterfaceSingle
 {
 	const	COMPRESS = true,
 			MIN_COMPRESSION_RATIO = 0.9,

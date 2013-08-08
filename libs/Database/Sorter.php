@@ -2,7 +2,7 @@
 
 namespace Otaku\Framework;
 
-class Database_Sorter
+class DatabaseSorter
 {
 	protected $field;
 	protected $prefix = false;

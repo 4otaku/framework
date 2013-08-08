@@ -2,7 +2,7 @@
 
 namespace Otaku\Framework;
 
-class Module_Ajax_Json_Error extends Module_Ajax_Json
+class ModuleAjaxJsonError extends ModuleAjaxJson
 {
 	public function __construct(Query $query, $disabled = false) {
 		parent::__construct($query, $disabled);

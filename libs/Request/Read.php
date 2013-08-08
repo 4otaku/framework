@@ -2,16 +2,16 @@
 
 namespace Otaku\Framework;
 
-class Request_Read extends Request implements Request_Groupable
+class RequestRead extends Request implements RequestGroupable
 {
 	public function can_group_with(Request $request)
 	{
-		return ($request instanceof Request_Read);
+		return ($request instanceof RequestRead);
 	}
 
 	public function get_grouped_request($requests)
 	{
-		$grouped = new Request_Read_Multi();
+		$grouped = new RequestReadMulti();
 		$grouped->add($this);
 		foreach ($requests as $request) {
 			$grouped->add($request);

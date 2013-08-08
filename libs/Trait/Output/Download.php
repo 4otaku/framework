@@ -2,7 +2,7 @@
 
 namespace Otaku\Framework;
 
-trait Trait_Output_Download
+trait TraitOutputDownload
 {
 	protected function format_data() {
 		if ($this->link) {

@@ -2,7 +2,7 @@
 
 namespace Otaku\Framework;
 
-abstract class Module_Abstract
+abstract class ModuleAbstract
 {
 	protected $modules = [];
 	protected $params = [];

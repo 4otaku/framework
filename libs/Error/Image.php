@@ -2,7 +2,7 @@
 
 namespace Otaku\Framework;
 
-class Error_Image extends Error_Upload
+class ErrorImage extends ErrorUpload
 {
 	const
 		CANT_SCALE_ANIMATED = 150,

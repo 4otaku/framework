@@ -2,7 +2,7 @@
 
 namespace Otaku\Framework;
 
-abstract class Transform_Image_Abstract_Animation implements Transform_Image_Interface
+abstract class TransformImageAbstractAnimation implements TransformImageInterface
 {
 	public function can_scale_animated() {
 		return true;

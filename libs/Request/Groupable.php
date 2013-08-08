@@ -2,7 +2,7 @@
 
 namespace Otaku\Framework;
 
-interface Request_Groupable
+interface RequestGroupable
 {
 	public function can_group_with(Request $request);
 

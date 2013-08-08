@@ -2,7 +2,7 @@
 
 namespace Otaku\Framework;
 
-class Database_Action
+class DatabaseAction
 {
 	const
 		ADD = 'Add',
@@ -12,7 +12,7 @@ class Database_Action
 
 	public static function get($type, $value = null)
 	{
-		$class = 'Database_Action_' . $type;
+		$class = 'DatabaseAction_' . $type;
 		return new $class($value);
 	}
 }

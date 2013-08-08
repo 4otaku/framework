@@ -2,7 +2,7 @@
 
 namespace Otaku\Framework;
 
-class Request_Item extends Request_Read
+class RequestItem extends RequestRead
 {
 	public function __construct($api = false, $object = false, $data = [],
 	                            $method = 'recieve_data') {

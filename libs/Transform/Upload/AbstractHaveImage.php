@@ -2,7 +2,7 @@
 
 namespace Otaku\Framework;
 
-abstract class Transform_Upload_Abstract_Have_Image extends Transform_Upload_Abstract
+abstract class TransformUploadAbstractHaveImage extends TransformUploadAbstract
 {
 	protected $info = array();
 	protected $animated = false;
@@ -78,7 +78,7 @@ abstract class Transform_Upload_Abstract_Have_Image extends Transform_Upload_Abs
 			$worker->write_image($target);
 		}
 		$worker->clear();
-		$this->worker = Transform_Image::get_worker($target);
+		$this->worker = TransformImage::get_worker($target);
 		return true;
 	}
 
@@ -131,7 +131,7 @@ abstract class Transform_Upload_Abstract_Have_Image extends Transform_Upload_Abs
 		$worker->write_images($target, true);
 
 		$worker->clear();
-		$this->worker = Transform_Image::get_worker($target);
+		$this->worker = TransformImage::get_worker($target);
 		return true;
 	}
 }

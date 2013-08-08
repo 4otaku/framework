@@ -2,7 +2,7 @@
 
 namespace Otaku\Framework;
 
-trait Trait_Output_Json
+trait TraitOutputJson
 {
 	private $success = false;
 	private $error = '';

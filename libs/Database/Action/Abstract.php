@@ -2,7 +2,7 @@
 
 namespace Otaku\Framework;
 
-abstract class Database_Action_Abstract
+abstract class DatabaseActionAbstract
 {
 	protected $value = null;
 

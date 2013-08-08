@@ -2,9 +2,9 @@
 
 namespace Otaku\Framework;
 
-abstract class Module_Ajax_Json extends Module_Abstract
+abstract class ModuleAjaxJson extends ModuleAbstract
 {
-	use Trait_Output_Json;
+	use TraitOutputJson;
 
 	protected $header = array('Content-type' => 'application/json');
 }

@@ -2,8 +2,8 @@
 
 namespace Otaku\Framework;
 
-class Module_Ajax_Error extends Module_Abstract
+class ModuleAjaxError extends ModuleAbstract
 {
-	use Trait_Output_Plain;
+	use TraitOutputPlain;
 	protected $header = ['status' => 404];
 }

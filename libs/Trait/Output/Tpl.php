@@ -2,9 +2,9 @@
 
 namespace Otaku\Framework;
 
-trait Trait_Output_Tpl
+trait TraitOutputTpl
 {
-	use Trait_Output_Html;
+	use TraitOutputHtml;
 
 	private $tpl = false;
 

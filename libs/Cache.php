@@ -17,11 +17,11 @@ class Cache
 	// в роли кеширующих, в порядке приоритета
 
 	public static $drivers_list = array(
-		"Cache_Memcached",
-		"Cache_Memcache",
-		"Cache_Database",
-		"Cache_Files",
-		"Cache_Dummy",
+		"CacheMemcached",
+		"CacheMemcache",
+		"CacheDatabase",
+		"CacheFiles",
+		"CacheDummy",
 	);
 
 	// Для хранения объекта выполняющего собственно кеширование
@@ -39,7 +39,7 @@ class Cache
 				self::$worker = new $defined_driver();
 
 				if (
-					self::$worker instanceOf Cache_Interface_Single &&
+					self::$worker instanceOf CacheInterfaceSingle &&
 					self::$worker->able_to_work
 				) {
 					return self::$worker;
@@ -55,7 +55,7 @@ class Cache
 				self::$worker = new $driver();
 
 				if (
-					self::$worker instanceOf Cache_Interface_Single &&
+					self::$worker instanceOf CacheInterfaceSingle &&
 					self::$worker->able_to_work
 				) {
 					break;
@@ -105,7 +105,7 @@ class Cache
 			$values = array_fill(0, count($keys), $values);
 		}
 
-		if ($worker instanceOf Cache_Interface_Array) {
+		if ($worker instanceOf CacheInterfaceArray) {
 			$function .= "_array";
 			$tmp_return = $worker->$function($keys, $values, $expire);
 		} else {

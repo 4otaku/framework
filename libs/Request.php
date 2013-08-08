@@ -2,6 +2,8 @@
 
 namespace Otaku\Framework;
 
+use Otaku\Api\ApiRequestInner;
+
 class Request
 {
 	protected $api = false;
@@ -71,7 +73,7 @@ class Request
 			}
 
 			$request = $requests[$i];
-			if (!($request instanceof Request_Groupable)) {
+			if (!($request instanceof RequestGroupable)) {
 				continue;
 			}
 			$group = array();
@@ -132,9 +134,9 @@ class Request
 				$response = json_decode($response, true);
 			}
 		} else {
-			$class = 'Api_' . implode('_', array_map('ucfirst',
+			$class = 'Otaku\Api\Api' . implode('', array_map('ucfirst',
 					explode('_', $api)));
-			$api_request = new Api_Request_Inner($data);
+			$api_request = new ApiRequestInner($data);
 			$worker = new $class($api_request);
 			$response = $worker->process_request()->get_response();
 		}

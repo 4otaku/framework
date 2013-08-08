@@ -2,7 +2,7 @@
 
 namespace Otaku\Framework;
 
-class Request_Delete extends Request
+class RequestDelete extends Request
 {
 	protected $priority = 3;
 

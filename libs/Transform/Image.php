@@ -2,7 +2,7 @@
 
 namespace Otaku\Framework;
 
-class Transform_Image
+class TransformImage
 {
 	protected static $worker_name;
 
@@ -12,16 +12,16 @@ class Transform_Image
 
 			return new $name($path);
 		} catch (Exception $e) {
-			throw new Error_Image(Error_Image::BROKEN_IMAGE);
+			throw new ErrorImage(ErrorImage::BROKEN_IMAGE);
 		}
 	}
 
 	protected static function get_worker_name() {
 		if (empty(self::$worker_name)) {
 			if (!class_exists('Imagick', false)) {
-				self::$worker_name = 'Transform_Image_Gd';
+				self::$worker_name = 'TransformImageGd';
 			} else {
-				self::$worker_name = 'Transform_Image_Imagick';
+				self::$worker_name = 'TransformImageImagick';
 			}
 		}
 

@@ -2,7 +2,7 @@
 
 namespace Otaku\Framework;
 
-class DatabaseInstance extends Database_Abstract
+class DatabaseInstance extends DatabaseAbstract
 {
 	protected $worker;
 	protected $statements = array();
@@ -45,7 +45,7 @@ class DatabaseInstance extends Database_Abstract
 
 		$data = array();
 
-		while ($row = $this->statements[$md5]->fetch(PDO::FETCH_ASSOC)) {
+		while ($row = $this->statements[$md5]->fetch(\PDO::FETCH_ASSOC)) {
 			$data[] = $row;
 		}
 
@@ -350,7 +350,7 @@ class DatabaseInstance extends Database_Abstract
 		$query = "UPDATE `{$this->prefix}$table` SET ";
 
 		foreach ($keys as $id => $key) {
-			if ($values[$id] instanceof Database_Action_Abstract) {
+			if ($values[$id] instanceof DatabaseActionAbstract) {
 				$query .= $values[$id]->get_query_for($key) . ",";
 				unset($values[$id]);
 			} else {
@@ -399,8 +399,8 @@ class DatabaseInstance extends Database_Abstract
 
 	public function order ($sorter, $type = 'desc') {
 
-		if (!($sorter instanceOf Database_Sorter)) {
-			$sorter = new Database_Sorter($sorter, $type);
+		if (!($sorter instanceOf DatabaseSorter)) {
+			$sorter = new DatabaseSorter($sorter, $type);
 		}
 
 		$this->order[] = $sorter;

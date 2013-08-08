@@ -2,9 +2,9 @@
 
 namespace Otaku\Framework;
 
-class Module_Container extends Module_Abstract
+class ModuleContainer extends ModuleAbstract
 {
-	use Trait_Output_Container;
+	use TraitOutputContainer;
 
 	protected $class_name;
 
@@ -13,12 +13,12 @@ class Module_Container extends Module_Abstract
 		$type = array_map('ucfirst', $type);
 		$this->class_name = 'Module_' . implode('_', $type);
 
-		parent::__construct(new Query_Dummy(), $disabled = false);
+		parent::__construct(new QueryDummy(), $disabled = false);
 	}
 
 	public function recieve_data($data) {
 		$class_name = $this->class_name;
-		$dummy = new Query_Dummy();
+		$dummy = new QueryDummy();
 		foreach ($data as $value) {
 			$module = new $class_name($dummy);
 			$module->recieve_data($value);

@@ -2,7 +2,7 @@
 
 namespace Otaku\Framework;
 
-interface Cache_Interface_Single
+interface CacheInterfaceSingle
 {
 	public function set ($key, $value, $expire);
 

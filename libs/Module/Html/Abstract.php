@@ -2,7 +2,7 @@
 
 namespace Otaku\Framework;
 
-abstract class Module_Html_Abstract extends Module_Abstract
+abstract class ModuleHtmlAbstract extends ModuleAbstract
 {
-	use Trait_Output_Tpl;
+	use TraitOutputTpl;
 }

@@ -2,7 +2,7 @@
 
 namespace Otaku\Framework;
 
-class Database_Action_Decrement extends Database_Action_Subtract
+class DatabaseActionDecrement extends DatabaseActionSubtract
 {
 	protected $value = 1;
 }

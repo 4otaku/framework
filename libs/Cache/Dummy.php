@@ -2,7 +2,7 @@
 
 namespace Otaku\Framework;
 
-class Cache_Dummy implements Cache_Interface_Single, Cache_Interface_Array
+class CacheDummy implements CacheInterfaceSingle, CacheInterfaceArray
 {
 	public $able_to_work = true;
 

@@ -2,7 +2,7 @@
 
 namespace Otaku\Framework;
 
-abstract class Database_Abstract
+abstract class DatabaseAbstract
 {
 	// Последний запрос и параметры от него
 	protected $last_query;

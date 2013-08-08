@@ -2,7 +2,7 @@
 
 namespace Otaku\Framework;
 
-abstract class Transform_Image_Abstract_Static implements Transform_Image_Interface
+abstract class TransformImageAbstractStatic implements TransformImageInterface
 {
 	public function can_scale_animated() {
 		return false;
@@ -13,14 +13,14 @@ abstract class Transform_Image_Abstract_Static implements Transform_Image_Interf
 	}
 
 	public function next_image() {
-		throw new Error_Image(Error_Image::CANT_SCALE_ANIMATED);
+		throw new ErrorImage(ErrorImage::CANT_SCALE_ANIMATED);
 	}
 
 	public function write_images($path, $adjoin) {
-		throw new Error_Image(Error_Image::CANT_SCALE_ANIMATED);
+		throw new ErrorImage(ErrorImage::CANT_SCALE_ANIMATED);
 	}
 
 	public function deconstruct_images() {
-		throw new Error_Image(Error_Image::CANT_SCALE_ANIMATED);
+		throw new ErrorImage(ErrorImage::CANT_SCALE_ANIMATED);
 	}
 }

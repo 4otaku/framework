@@ -2,7 +2,7 @@
 
 namespace Otaku\Framework;
 
-abstract class Transform_Upload_Abstract
+abstract class TransformUploadAbstract
 {
 	protected $name;
 	protected $file;
@@ -44,7 +44,7 @@ abstract class Transform_Upload_Abstract
 		$maxsize = $this->get_max_size();
 
 		if ($this->size > $maxsize) {
-			throw new Error_Upload(Error_Upload::FILE_TOO_LARGE);
+			throw new ErrorUpload(ErrorUpload::FILE_TOO_LARGE);
 		}
 	}
 

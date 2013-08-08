@@ -164,7 +164,7 @@ class Session
 	protected function load_api() {
 		if (!$this->api_loaded) {
 			// Пробуем считаем пользователя из api
-			$request = new Request_Read('user', $this, ['cookie' => $this->hash]);
+			$request = new RequestRead('user', $this, ['cookie' => $this->hash]);
 			$request->perform();
 			$this->api_loaded = true;
 		}

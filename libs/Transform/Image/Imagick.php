@@ -2,7 +2,7 @@
 
 namespace Otaku\Framework;
 
-class Transform_Image_Imagick extends Transform_Image_Abstract_Animation
+class TransformImageImagick extends TransformImageAbstractAnimation
 {
 	protected $worker;
 
@@ -17,7 +17,7 @@ class Transform_Image_Imagick extends Transform_Image_Abstract_Animation
 			return $new_object;
 		} 
 
-		throw new Error_Image(Error_Image::UNEXPECTED_FUNCTION_CALL);
+		throw new ErrorImage(ErrorImage::UNEXPECTED_FUNCTION_CALL);
 	}
 
 	public function set_worker(Imagick $worker) {

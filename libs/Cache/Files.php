@@ -2,7 +2,7 @@
 
 namespace Otaku\Framework;
 
-class Cache_Files implements Cache_Interface_Single
+class CacheFiles implements CacheInterfaceSingle
 {
 	const FOLDER = "files_cache";
 

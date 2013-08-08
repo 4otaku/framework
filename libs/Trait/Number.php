@@ -2,7 +2,7 @@
 
 namespace Otaku\Framework;
 
-trait Trait_Number
+trait TraitNumber
 {
 	protected function wcase($count, $form1, $form2, $form3) {
 		if ($count > 9) {

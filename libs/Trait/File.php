@@ -2,7 +2,7 @@
 
 namespace Otaku\Framework;
 
-trait Trait_File
+trait TraitFile
 {
 	protected $size_types = array('б', 'кб', 'мб', 'гб');
 

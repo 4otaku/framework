@@ -2,9 +2,9 @@
 
 namespace Otaku\Framework;
 
-trait Trait_Output_Container
+trait TraitOutputContainer
 {
-	use Trait_Output_Html;
+	use TraitOutputHtml;
 
 	protected function format_data() {
 		$return = '';

@@ -2,7 +2,7 @@
 
 namespace Otaku\Framework;
 
-class Query_Dummy extends Query
+class QueryDummy extends Query
 {
 	public function __construct()
 	{}

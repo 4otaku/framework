@@ -2,7 +2,7 @@
 
 namespace Otaku\Framework;
 
-abstract class Cron_Abstract
+abstract class CronAbstract
 {
 	protected $db;
 

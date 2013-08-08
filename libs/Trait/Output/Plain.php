@@ -2,7 +2,7 @@
 
 namespace Otaku\Framework;
 
-trait Trait_Output_Plain
+trait TraitOutputPlain
 {
 	protected function format_data() {
 		return isset($this->params['module_0']) ?

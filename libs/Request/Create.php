@@ -2,7 +2,7 @@
 
 namespace Otaku\Framework;
 
-class Request_Create extends Request
+class RequestCreate extends Request
 {
 	protected $priority = 2;
 

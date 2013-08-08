@@ -2,7 +2,7 @@
 
 namespace Otaku\Framework;
 
-class Request_Read_Multi extends Request
+class RequestReadMulti extends Request
 {
 
 	public function get_api()

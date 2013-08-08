@@ -2,9 +2,9 @@
 
 namespace Otaku\Framework;
 
-abstract class Module_Download_Abstract extends Module_Abstract
+abstract class ModuleDownloadAbstract extends ModuleAbstract
 {
-	use Trait_Output_Download;
+	use TraitOutputDownload;
 
 	protected $id = 0;
 	protected $link = false;

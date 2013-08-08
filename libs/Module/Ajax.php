@@ -2,9 +2,9 @@
 
 namespace Otaku\Framework;
 
-class Module_Ajax extends Module_Abstract
+class ModuleAjax extends ModuleAbstract
 {
-	use Trait_Output_Plain;
+	use TraitOutputPlain;
 
 	protected function get_modules(Query $query) {
 		$url = $query->url();
@@ -16,13 +16,13 @@ class Module_Ajax extends Module_Abstract
 		}
 
 		$class = implode('_', array_map('ucfirst', $url));
-		$class = 'Module_Ajax_' . $class;
+		$class = 'ModuleAjax_' . $class;
 
 		if (!class_exists($class)) {
 			if ($query->get('format') == 'json') {
-				return new Module_Ajax_Json_Error($query);
+				return new ModuleAjaxJsonError($query);
 			} else {
-				return new Module_Ajax_Error($query);
+				return new ModuleAjaxError($query);
 			}
 		}
 

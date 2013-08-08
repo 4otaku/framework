@@ -2,7 +2,7 @@
 
 namespace Otaku\Framework;
 
-trait Trait_Output_Html
+trait TraitOutputHtml
 {
 	public function get_css() {
 		$css = (array) $this->css;

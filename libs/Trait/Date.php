@@ -2,7 +2,7 @@
 
 namespace Otaku\Framework;
 
-trait Trait_Date
+trait TraitDate
 {
 	protected $rumonth = [
 		'Январь', 'Февраль', 'Март', 'Апрель',

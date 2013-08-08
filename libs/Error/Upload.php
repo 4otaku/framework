@@ -2,7 +2,7 @@
 
 namespace Otaku\Framework;
 
-class Error_Upload extends Error
+class ErrorUpload extends Error
 {
 	const
 		ALREADY_EXISTS = 30,

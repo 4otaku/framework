@@ -2,7 +2,7 @@
 
 namespace Otaku\Framework;
 
-interface Cache_Interface_Array
+interface CacheInterfaceArray
 {
 	public function set_array ($keys, $values, $expire);
 

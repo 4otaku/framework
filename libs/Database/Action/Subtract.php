@@ -2,7 +2,7 @@
 
 namespace Otaku\Framework;
 
-class Database_Action_Subtract extends Database_Action_Abstract
+class DatabaseActionSubtract extends DatabaseActionAbstract
 {
 	public function get_query_for($key)
 	{

@@ -2,7 +2,7 @@
 
 namespace Otaku\Framework;
 
-interface Transform_Image_Interface
+interface TransformImageInterface
 {
 	public function __construct($path);
 
