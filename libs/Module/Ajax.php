@@ -19,7 +19,7 @@ class Ajax extends Base
 		}
 
 		$class = implode('', array_map('ucfirst', $url));
-		$class = __NAMESPACE__ . '\Ajax' . $class;
+		$class = \Autoload::getDefaultNamespace() . '\Module\Ajax' . $class;
 
 		if (!class_exists($class)) {
 			if ($query->get('format') == 'json') {

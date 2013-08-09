@@ -2,12 +2,12 @@
 
 class Autoload
 {
-	protected $spaces = array();
+	protected static $spaces = array();
 	protected $external = '';
 
 	public function __construct($spaces, $external)
 	{
-		$this->spaces = (array) $spaces;
+		self::$spaces = (array) $spaces;
 		$this->external = (string) $external;
 
 		spl_autoload_register(array($this, 'find'), false);
@@ -24,7 +24,7 @@ class Autoload
 		}
 		// second namespace level points to a project
 		$base = array_shift($class);
-		if (!isset($this->spaces[$base])) {
+		if (!isset(self::$spaces[$base])) {
 			return;
 		}
 		$className = array_pop($class);
@@ -32,11 +32,17 @@ class Autoload
 		$class = array_merge($class, $className);
 		$class = implode(SL, $class);
 
-		require_once $this->spaces[$base] . SL . $class . '.php';
+		require_once self::$spaces[$base] . SL . $class . '.php';
 	}
 
 	public function external($class)
 	{
 		require_once $this->external . SL . $class . '.php';
+	}
+
+	public static function getDefaultNamespace()
+	{
+		$default = key(self::$spaces);
+		return 'Otaku\\' . $default;
 	}
 }
