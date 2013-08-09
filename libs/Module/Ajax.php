@@ -18,6 +18,12 @@ class Ajax extends Base
 			return array();
 		}
 
+		$last = array_pop($url);
+		$last = preg_replace_callback('/_([a-z])/', function($res){
+			return strtoupper($res[1]);
+		}, $last);
+		$url[] = $last;
+
 		$class = implode('', array_map('ucfirst', $url));
 		$class = \Autoload::getDefaultNamespace() . '\Module\Ajax' . $class;
 
