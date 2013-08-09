@@ -12,7 +12,7 @@ class DatabaseAction
 
 	public static function get($type, $value = null)
 	{
-		$class = 'DatabaseAction_' . $type;
+		$class = 'DatabaseAction' . $type;
 		return new $class($value);
 	}
 }
