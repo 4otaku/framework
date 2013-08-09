@@ -19,9 +19,9 @@ class TransformImage
 	protected static function get_worker_name() {
 		if (empty(self::$worker_name)) {
 			if (!class_exists('Imagick', false)) {
-				self::$worker_name = 'TransformImageGd';
+				self::$worker_name = 'Otaku\Framework\TransformImageGd';
 			} else {
-				self::$worker_name = 'TransformImageImagick';
+				self::$worker_name = 'Otaku\Framework\TransformImageImagick';
 			}
 		}
 

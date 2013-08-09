@@ -37,6 +37,7 @@ class Autoload
 
 	public function external($class)
 	{
+		$class = str_replace('\\', SL, $class);
 		require_once $this->external . SL . $class . '.php';
 	}
 

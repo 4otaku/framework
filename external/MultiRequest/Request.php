@@ -1,14 +1,16 @@
 <?php
 
+namespace MultiRequest;
+
 /**
  * @see http://code.google.com/p/multirequest
  * @author Barbushin Sergey http://www.linkedin.com/in/barbushin
  *
  */
-class MultiRequest_Request {
+class Request {
 
 	/**
-	 * @var MultiRequest_Callbacks
+	 * @var Callbacks
 	 */
 	protected $callbacks;
 
@@ -30,7 +32,7 @@ class MultiRequest_Request {
 	protected static $clientsEncodings;
 
 	public function __construct($url) {
-		$this->callbacks = new MultiRequest_Callbacks();
+		$this->callbacks = new Callbacks();
 		$this->url = $url;
 		$this->setUrl($url);
 	}
@@ -167,7 +169,7 @@ class MultiRequest_Request {
 		return $this->curlInfo['http_code'];
 	}
 
-	public function initResponseDataFromHandler(MultiRequest_Handler $handler) {
+	public function initResponseDataFromHandler(Handler $handler) {
 		$curlHandle = $this->getCurlHandle();
 		$this->curlInfo = curl_getinfo($curlHandle);
 		$this->error = curl_error($curlHandle);
@@ -185,7 +187,7 @@ class MultiRequest_Request {
 		}
 	}
 
-	public function notifyIsComplete(MultiRequest_Handler $handler) {
+	public function notifyIsComplete(Handler $handler) {
 		$this->callbacks->onComplete($this, $handler);
 
 		$failException = $this->getFailException();
@@ -212,11 +214,11 @@ class MultiRequest_Request {
 		return $this;
 	}
 
-	public function notifyIsSuccess(MultiRequest_Handler $handler) {
+	public function notifyIsSuccess(Handler $handler) {
 		$this->callbacks->onSuccess($this, $handler);
 	}
 
-	public function notifyIsFailed(MultiRequest_Exception $exception, MultiRequest_Handler $handler) {
+	public function notifyIsFailed(MultiRequest_Exception $exception, Handler $handler) {
 		$this->callbacks->onFailed($this, $exception, $handler);
 	}
 
@@ -280,7 +282,7 @@ class MultiRequest_Request {
 	}
 }
 
-class MultiRequest_Exception extends Exception {
+class MultiRequest_Exception extends \Exception {
 }
 
 class MultiRequest_FailedConnection extends MultiRequest_Exception {

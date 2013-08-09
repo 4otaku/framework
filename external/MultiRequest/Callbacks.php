@@ -1,11 +1,13 @@
 <?php
 
+namespace MultiRequest;
+
 /**
  * @see http://code.google.com/p/multirequest
  * @author Barbushin Sergey http://www.linkedin.com/in/barbushin
  *
  */
-class MultiRequest_Callbacks {
+class Callbacks {
 
 	protected $callbacks;
 
@@ -17,7 +19,7 @@ class MultiRequest_Callbacks {
 			else {
 				$callbackName = $callback;
 			}
-			throw new Exception('Callback "' . $callbackName . '" with name "' . $name . '" is not callable');
+			throw new \Exception('Callback "' . $callbackName . '" with name "' . $name . '" is not callable');
 		}
 		$this->callbacks[$name][] = $callback;
 	}

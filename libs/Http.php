@@ -1,6 +1,8 @@
 <?php
 
-namespace otaku\framework;
+namespace Otaku\Framework;
+use MultiRequest\Handler;
+use MultiRequest\Request;
 
 class Http
 {
@@ -33,7 +35,7 @@ class Http
 
 	public function __construct ($options = array(), $headers = array()) {
 
-		$worker = new \MultiRequest_Handler();
+		$worker = new Handler();
 		$worker->setConnectionsLimit(self::CONNECTIONS_LIMIT);
 		$worker->onRequestComplete(array($this, "save_headers"));
 		$worker->onRequestComplete(array($this, "save_data"));
@@ -55,7 +57,7 @@ class Http
 		$urls = (array) $urls;
 
 		foreach($urls as $url) {
-			$request = new \MultiRequest_Request($url);
+			$request = new Request($url);
 
 			if ($this->range) {
 				$domain = parse_url($url, PHP_URL_HOST);
@@ -96,7 +98,7 @@ class Http
 		$this->worker->onRequestComplete(array($this, "notify_error"));
 	}
 
-	public function notify_error($request) {
+	public function notify_error(Request $request) {
 		$error = $request->getFailException();
 		if ($error && $request->getCode() != 206) {
 			ob_end_flush();
@@ -111,11 +113,11 @@ class Http
 		return $this;
 	}
 
-	public function save_headers ($request) {
+	public function save_headers (Request $request) {
 		$this->response_header[$request->getRawUrl()] = $request->getResponseHeaders(true);
 	}
 
-	public function save_data ($request) {
+	public function save_data (Request $request) {
 		$this->response_data[$request->getRawUrl()] = $request->getContent();
 	}
 

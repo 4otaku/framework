@@ -1,16 +1,18 @@
 <?php
 
+namespace MultiRequest;
+
 /**
  * @see http://code.google.com/p/multirequest
  * @author Barbushin Sergey http://www.linkedin.com/in/barbushin
  *
  */
-class MultiRequest_Defaults {
+class Defaults {
 
 	protected $properties = array();
 	protected $methods = array();
 
-	public function applyToRequest(MultiRequest_Request $request) {
+	public function applyToRequest(Request $request) {
 		foreach($this->properties as $property => $value) {
 			$request->$property = $value;
 		}

@@ -1,27 +1,29 @@
 <?php
 
+namespace MultiRequest;
+
 /**
  * @see http://code.google.com/p/multirequest
  * @author Barbushin Sergey http://www.linkedin.com/in/barbushin
  *
  */
-class MultiRequest_Handler {
-	
+class Handler {
+
 	/**
-	 * @var MultiRequest_RequestsDefaults
+	 * @var RequestsDefaults
 	 */
 	protected $requestsDefaults;
-	
+
 	/**
-	 * @var MultiRequest_Callbacks
+	 * @var Callbacks
 	 */
 	protected $callbacks;
-	
+
 	/**
 	 * @var MultiRequest_Queue
 	 */
 	protected $queue;
-	
+
 	protected $connectionsLimit = 60;
 	protected $totalTytesTransfered;
 	protected $isActive;
@@ -31,9 +33,9 @@ class MultiRequest_Handler {
 	protected $requestingDelay = 0.01;
 
 	public function __construct() {
-		$this->queue = new MultiRequest_Queue();
-		$this->requestsDefaults = new MultiRequest_Defaults();
-		$this->callbacks = new MultiRequest_Callbacks();
+		$this->queue = new Queue();
+		$this->requestsDefaults = new Defaults();
+		$this->callbacks = new Callbacks();
 	}
 
 	public function getQueue() {
@@ -49,13 +51,13 @@ class MultiRequest_Handler {
 		return $this;
 	}
 
-	protected function notifyRequestComplete(MultiRequest_Request $request) {
+	protected function notifyRequestComplete(Request $request) {
 		$request->notifyIsComplete($this);
 		$this->callbacks->onRequestComplete($request, $this);
 	}
 
 	/**
-	 * @return MultiRequest_Request
+	 * @return Request
 	 */
 	public function requestsDefaults() {
 		return $this->requestsDefaults;
@@ -90,11 +92,11 @@ class MultiRequest_Handler {
 		$this->start();
 	}
 
-	public function pushRequestToQueue(MultiRequest_Request $request) {
+	public function pushRequestToQueue(Request $request) {
 		$this->queue->push($request);
 	}
 
-	protected function sendRequestToMultiCurl($mcurlHandle, MultiRequest_Request $request) {
+	protected function sendRequestToMultiCurl($mcurlHandle, Request $request) {
 		$this->requestsDefaults->applyToRequest($request);
 		curl_multi_add_handle($mcurlHandle, $request->getCurlHandle());
 	}
@@ -105,13 +107,13 @@ class MultiRequest_Handler {
 		}
 		$this->isActive = true;
 		$this->isStarted = true;
-		
+
 		try {
-			
+
 			$this->mcurlHandle = $mcurlHandle = curl_multi_init();
-			
+
 			do {
-				
+
 				// send requests from queue to CURL
 				if(count($this->activeRequests) < $this->connectionsLimit) {
 					for($i = $this->connectionsLimit - count($this->activeRequests); $i > 0; $i --) {
@@ -125,22 +127,22 @@ class MultiRequest_Handler {
 						}
 					}
 				}
-				
+
 				while(CURLM_CALL_MULTI_PERFORM === curl_multi_exec($mcurlHandle, $activeThreads));
-				
+
 				// check complete requests
 				curl_multi_select($mcurlHandle, $this->requestingDelay);
 				while($completeCurlInfo = curl_multi_info_read($mcurlHandle)) {
-					$completeRequestId = MultiRequest_Request::getRequestIdByCurlHandle($completeCurlInfo['handle']);
+					$completeRequestId = Request::getRequestIdByCurlHandle($completeCurlInfo['handle']);
 					$completeRequest = $this->activeRequests[$completeRequestId];
 					unset($this->activeRequests[$completeRequestId]);
 					curl_multi_remove_handle($mcurlHandle, $completeRequest->getCurlHandle());
 					$completeRequest->initResponseDataFromHandler($this);
-					
+
 					// check if response code is 301 or 302 and follow location
 					$ignoreNotification = false;
 					$completeRequestCode = $completeRequest->getCode();
-					
+
 					if($completeRequestCode == 301 || $completeRequestCode == 302) {
 						$completeRequestOptions = $completeRequest->getCurlOptions();
 						if(!empty($completeRequestOptions[CURLOPT_FOLLOWLOCATION])) {
@@ -161,19 +163,19 @@ class MultiRequest_Handler {
 			}
 			while(!$this->isStopped && ($this->activeRequests || $this->queue->count()));
 		}
-		catch(Exception $exception) {
+		catch(\Exception $exception) {
 		}
-		
+
 		$this->isActive = false;
-		
+
 		if($mcurlHandle && is_resource($mcurlHandle)) {
 			curl_multi_close($mcurlHandle);
 		}
-		
+
 		if(!empty($exception)) {
 			throw $exception;
 		}
-		
+
 		$this->callbacks->onComplete($this);
 	}
 }
