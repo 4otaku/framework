@@ -11,6 +11,7 @@ abstract class AjaxApi extends AjaxJson
 				$this->set_error($error['code'], $error['message']);
 			}
 		}
+        parent::recieve_data($data);
 	}
 }
 
