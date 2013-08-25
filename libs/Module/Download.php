@@ -12,8 +12,9 @@ class Download extends Base
 	protected function get_modules(Query $query) {
 		$type = (string) $query->get('type');
 		$type = explode('_', $type);
-		$type = implode('_', array_map('ucfirst', $type));
-		$class = 'ModuleDownload_' . $type;
+		$type = implode('', array_map('ucfirst', $type));
+
+        $class = \Autoload::getDefaultNamespace() . '\Module\Download' . $type;
 
 		if (!class_exists($class)) {
 			return [];
