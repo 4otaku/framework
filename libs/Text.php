@@ -204,6 +204,7 @@ class Text
 						$replacement = '<s>' . $innertext . '</s>';
 						break;
 					case 'size':
+						$param = min((int) $param, 500);
 						$replacement = '<span style="font-size:' . $param . '%;">' .
 							$innertext . '</span>';
 						break;
