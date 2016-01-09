@@ -5,11 +5,12 @@ namespace Otaku\Framework;
 class Cron
 {
 	protected static $db;
+	protected static $name;
 	protected static $workers = array();
 
 	public static function process($class, $function, $id = 0)
 	{
-		$class = 'Otaku\\'.ucfirst(self::$db).'\\Cron' . ucfirst($class);
+		$class = 'Otaku\\'.self::$name.'\\Cron' . ucfirst($class);
 
 		if (empty(self::$workers[$class])) {
 			self::$workers[$class] = new $class(self::$db);
@@ -21,6 +22,11 @@ class Cron
 	public static function set_db($db)
 	{
 		self::$db = Database::db($db);
+	}
+
+	public static function set_name($name)
+	{
+		self::$name = $name;
 	}
 
 	public static function process_db($db)
