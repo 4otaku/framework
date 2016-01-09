@@ -9,7 +9,7 @@ class Cron
 
 	public static function process($class, $function, $id = 0)
 	{
-		$class = 'Cron_' . ucfirst($class);
+		$class = 'Otaku\\'.ucfirst(self::$db).'\\Cron' . ucfirst($class);
 
 		if (empty(self::$workers[$class])) {
 			self::$workers[$class] = new $class(self::$db);
