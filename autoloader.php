@@ -32,13 +32,24 @@ class Autoload
 		$class = array_merge($class, $className);
 		$class = implode(SL, $class);
 
-		require_once self::$spaces[$base] . SL . $class . '.php';
+		$class = self::$spaces[$base] . SL . $class . '.php';
+		if (file_exists($class)) {
+			require $class;
+			return true;
+		}
+
+		return false;
 	}
 
 	public function external($class)
 	{
-		$class = str_replace('\\', SL, $class);
-		require_once $this->external . SL . $class . '.php';
+		$class = $this->external . SL . str_replace('\\', SL, $class) . '.php';
+		if (file_exists($class)) {
+			require $class;
+			return true;
+		}
+
+		return false;
 	}
 
 	public static function getDefaultNamespace()
