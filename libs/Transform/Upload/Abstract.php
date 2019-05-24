@@ -10,6 +10,7 @@ abstract class TransformUploadAbstract
 	protected $unlink;
 	protected $result = array('success' => true);
 	protected $base_path = null;
+	protected $worker;
 
 	public function __construct($file, $name, $base_path = false) {
 		if (!@is_file($file)) {
