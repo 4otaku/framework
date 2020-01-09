@@ -3,9 +3,10 @@
 	define('ROOT_DIR', dirname(__DIR__));
 
 	if (isset($_SERVER['REMOTE_ADDR'])) {
-		define('DEBUG', $_SERVER['REMOTE_ADDR'] == '80.252.16.11'
-			|| $_SERVER['REMOTE_ADDR'] == '127.0.0.1'
-			|| $_SERVER['APP_ENV'] == 'dev');
+		define('DEBUG', $_SERVER['REMOTE_ADDR'] == '127.0.0.1'
+//			|| $_SERVER['REMOTE_ADDR'] == '80.252.16.11'
+			|| isset($_SERVER['APP_ENV']) && $_SERVER['APP_ENV'] == 'dev'
+		);
 	} else {
 		define('DEBUG', 0);
 	}
