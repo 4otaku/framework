@@ -5,6 +5,9 @@ namespace Otaku\Framework;
 class DatabaseInstance extends DatabaseAbstract
 {
 	protected $worker;
+	/**
+	 * @var \PDOStatement|array
+	 */
 	protected $statements = array();
 
 	protected $counter = 0;
@@ -31,7 +34,7 @@ class DatabaseInstance extends DatabaseAbstract
 		$this->prefix = $prefix;
 	}
 
-	protected function query($query, $params = array()) {
+	protected function query($query, $params = array(), $isVoid = false) {
 		$params = (array) $params;
 		$params = array_values($params);
 
@@ -49,6 +52,10 @@ class DatabaseInstance extends DatabaseAbstract
 		}
 
 		$data = array();
+
+		if ($isVoid) {
+			return $data;
+		}
 
 		while ($row = $this->statements[$md5]->fetch(\PDO::FETCH_ASSOC)) {
 			$data[] = $row;
@@ -267,7 +274,7 @@ class DatabaseInstance extends DatabaseAbstract
 
 		$query .= $this->format_insert_values($values);
 
-		$this->query($query, $values);
+		$this->query($query, $values, true);
 
 		return $this->last_query->rowCount();
 	}
@@ -302,7 +309,7 @@ class DatabaseInstance extends DatabaseAbstract
 			$values = array_merge($values, $update_values);
 		}
 
-		$this->query($query, $values);
+		$this->query($query, $values, true);
 
 		return $this->last_query->rowCount();
 	}
@@ -336,7 +343,7 @@ class DatabaseInstance extends DatabaseAbstract
 
 		$query = rtrim($query,",");
 
-		$this->query($query, $params);
+		$this->query($query, $params, true);
 
 		return $this->last_query->rowCount();
 	}
@@ -371,7 +378,7 @@ class DatabaseInstance extends DatabaseAbstract
 
 		$params = array_merge(array_values($values), $condition_params);
 
-		$this->query($query, $params);
+		$this->query($query, $params, true);
 
 		return $this->last_query->rowCount();
 	}
@@ -389,7 +396,7 @@ class DatabaseInstance extends DatabaseAbstract
 
 		$query .= " WHERE $condition";
 
-		$this->query($query, $params);
+		$this->query($query, $params, true);
 
 		return $this->last_query->rowCount();
 	}
