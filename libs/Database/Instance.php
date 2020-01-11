@@ -21,6 +21,11 @@ class DatabaseInstance extends DatabaseAbstract
 	protected $temp_table = false;
 	protected $temp_params = array();
 
+	/**
+	 * DatabaseInstance constructor.
+	 * @param \PDO $worker
+	 * @param string $prefix
+	 */
 	public function __construct($worker, $prefix = "") {
 		$this->worker = $worker;
 		$this->prefix = $prefix;

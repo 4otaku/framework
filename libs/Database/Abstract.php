@@ -4,7 +4,10 @@ namespace Otaku\Framework;
 
 abstract class DatabaseAbstract
 {
-	// Последний запрос и параметры от него
+	/**
+	 * Последний запрос и параметры от него
+	 * @var \PDOStatement|false
+	 */
 	protected $last_query;
 	protected $last_params = array();
 
